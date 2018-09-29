@@ -20,16 +20,20 @@ public class LoginController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		CustomerDao customerDao = new CustomerDaoImpl();
+		UserDao customerDao = new UserDaoImpl();
 		
-		String username = request.getParameter("username");
+		int username = Integer.parseInt(request.getParameter("username"));
 		String pass = request.getParameter("password");
 		String submitType = request.getParameter("submit");
 		Login login = new Login(username, pass);
-		Customer c = customerDao.validateCustomer(login);
+		User c = customerDao.validateUser(login);
 		
 		if(submitType.equals("login") && c!=null && c.getName()!=null){
 			request.setAttribute("message", "Hello "+c.getName());
+			VehicleDao vehicleDao = new VehicleDao();
+			Vehicle v = vehicleDao.VehicleDetails(login);
+			request.setAttribute("vehicleDetails", v.getMake() + " "+ v.getModel());
+			request.setAttribute("licenseNum", v.getLicenseNum());
 			request.getRequestDispatcher("welcome.jsp").forward(request, response);
 		}else if(submitType.equals("register")){
 			c.setName(request.getParameter("name"));
