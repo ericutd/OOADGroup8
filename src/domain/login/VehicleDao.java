@@ -30,4 +30,23 @@ public class VehicleDao {
 		}
 		return v;
 	}
+	
+	public int register(Vehicle v,int userId) {
+		int status = 0;
+		try{
+			conn = db.getConnection();
+			ps =conn.prepareStatement("insert into vehicle values(?,?,?,?,?,?)");
+			ps.setInt(1, userId);
+			ps.setString(2, v.getLicenseNum());
+			ps.setString(3, v.getMake());
+			ps.setString(4, v.getModel());
+			ps.setString(5,v.getYear());
+			ps.setString(6, v.getColor());
+			status = ps.executeUpdate();
+			conn.close();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return status;
+	}
 }

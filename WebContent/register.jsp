@@ -11,15 +11,29 @@
 <body>
 <form name="regform" action="LoginController" method="post" onsubmit="return regValidate()">
 	<br>${message}<br>
+	<h1>Parking Management Service</h1>
+	<h2>User Registration</h2>
+	<h3>User Information:</h3>
 	
-	Username: <input type="text" name="username"> <br>
 	<div id="username_error"></div><br>
-	Customer name: <input type="text" name="name"><br>
+	UserId: <input type="text" name="userid"><br>
+	Name: <input type="text" name="name"><br>
 	
 	Password: <input type="password" name="password" id="password"> 
 	<br>
-	Re-Type Password: <input type="password" name="retry-password" id="retry-password"> 
+	Re-Type Password: <input type="password" name="retry-password" id="retry-password"> <br>
+	Email: <input type="text" name="email" id ="email">
 	<br>
+	Account Type: <input type="text" name="acctype" id="acctype"> <br>
+	
+	<h3>Vehicle Information</h3>
+    
+    License Number: <input type="text" name="licnum" id="licnum"> <br>
+    Make: <input type="text" name="make" id="make"> <br>
+    Model: <input type="text" name="model" id="model"> <br>
+    Year: <input type="text" name="year" id="year"> <br>
+    Color: <input type="text" name="color" id="color"> <br>
+	
 	<div id="password_error"></div><br>
 	<input type="submit" name="submit" value="register" >
 	<input type="reset" name="reset">

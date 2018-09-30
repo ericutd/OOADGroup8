@@ -7,13 +7,14 @@
 <title>Welcome Page</title>
 </head>
 <body>
-<h1> ${message} !!! </h1>
+<h1>Parking Management Service</h1>
+<h2> ${message} !!! </h2>
 
-<h2> Registered Vehicles:</h2>
+<h3> Registered Vehicles:</h3>
 
-	<h3> ${vehicleDetails}</h3>
-	<h3>License Number: ${licenseNum }</h3>
-	<a href="ReserveSpot.jsp">Reserve a Spot</a> </br>
+	<h4> ${vehicleDetails}</h4>
+	<h4>License Number: ${licenseNum }</h4>
+	<a href="reservation.jsp">Reserve a Spot</a> </br>
 	<a href="logout.jsp">logout</a>
 
 </body>

@@ -10,30 +10,15 @@
 <title>Login Page</title>
 </head>
 <body>
-	<%out.print("Hello!"); %>
-	<%= new java.util.Date() %>
 	
-	
-	<%! int number1, number2; %>
-	
-	<%
-		DbManager db = new DbManager();
-		Connection conn = (Connection) db.getConnection();
-		if(conn == null)
-			out.print("failed");
-		else
-			out.print("succeeded");
-	
-	%>
-	<br/>
-	
+	<h1>Parking Management Service</h1>
 	<form name="loginform" action="LoginController" method="post" onsubmit="return loginValidate()" >
 	<br>
 	${message}<br>
 	${successMessage}<br>
 	
 	
-	Username: <input type="text" name="username" id="username"><br>
+	UserId: <input type="text" name="userid" id="userid"><br>
 	Password: <input type="password" name="password" id="password"><br>
 	<input type="submit" name="submit" value="login"><br>
 	<a href="register.jsp">registration</a>
