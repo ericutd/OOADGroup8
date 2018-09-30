@@ -44,3 +44,19 @@ function loginValidate(){
         return false;
     }
 }
+
+function validateReserve(){
+    var lotId = document.forms["reservationForm"]["lotId"].value;
+    var spotId = document.forms["reservationForm"]["spotId"].value;
+    
+    if (lotId == "") {
+        alert("username must be filled out");
+        document.forms["reservationForm"]["lotId"].focus();
+        return false;
+    }
+    if (spotId== "") {
+        alert("password must be filled out");
+        document.forms["reservationForm"]["spotId"].focus();
+        return false;
+    }
+}
