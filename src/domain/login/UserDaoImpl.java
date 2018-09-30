@@ -19,10 +19,12 @@ public class UserDaoImpl implements UserDao {
 		int status = 0;
 		try{
 			conn = db.getConnection();
-			ps =conn.prepareStatement("insert into customer values(?,?,?)");
+			ps =conn.prepareStatement("insert into customer values(?,?,?,?,?)");
 			ps.setString(1, c.getUsername());
 			ps.setString(2, c.getPassword());
 			ps.setString(3, c.getName());
+			ps.setString(4, c.getEmail());
+			ps.setString(5, c.getAccountType());
 			status = ps.executeUpdate();
 			conn.close();
 		}catch(Exception e){
