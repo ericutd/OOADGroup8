@@ -1,3 +1,4 @@
+package Reservation;
 /* Author: Zack Oldham
  * CS 6359.002
  * 09/30/2018
@@ -18,7 +19,7 @@ public class ReservationController extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	private Reservation R;
-	private ReservationAssistant ra;
+	private ReservationAssistant ra = new ReservationAssistant();
 	
 	
 	
@@ -30,7 +31,8 @@ public class ReservationController extends HttpServlet
 		int parkingLotId = Integer.parseInt(request.getParameter("lotId"));
 		int parkingSpotId = Integer.parseInt(request.getParameter("spotId"));
 		String date = request.getParameter("reservationDate");
-		int userId = (int)request.getAttribute("userId");
+		//int userId = (int)request.getAttribute("userId");
+		int userId = 12345;
 		R = new Reservation(userId, parkingLotId, parkingSpotId, date);
 		
 		try
@@ -40,7 +42,7 @@ public class ReservationController extends HttpServlet
 		catch(Exception ex)
 		{
 			request.setAttribute("message", " " + ex);
-			request.getRequestDispatcher("reservation.jsp").forward(request, response);
+			//request.getRequestDispatcher("reservation.jsp").forward(request, response);
 		}
 			
 		request.setAttribute("message", " Success! You have reserved spot number " + parkingSpotId + "in lot number " + parkingLotId + "on " + date); 
