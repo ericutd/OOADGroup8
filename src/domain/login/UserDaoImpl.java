@@ -8,21 +8,23 @@ import db.DbManager;
 
 
 
-public class CustomerDaoImpl implements CustomerDao {
+public class UserDaoImpl implements UserDao {
 
 	static Connection conn;
 	static PreparedStatement ps;
 	DbManager db = new DbManager();
 	
 	@Override
-	public int register(Customer c) {
+	public int register(User c) {
 		int status = 0;
 		try{
 			conn = db.getConnection();
-			ps =conn.prepareStatement("insert into customer values(?,?,?)");
-			ps.setString(1, c.getUsername());
-			ps.setString(2, c.getPassword());
-			ps.setString(3, c.getName());
+			ps =conn.prepareStatement("insert into user values(?,?,?,?,?)");
+			ps.setInt(1, c.getUserid());
+			ps.setString(2, c.getName());
+			ps.setString(3, c.getPassword());
+			ps.setString(4, c.getEmail());
+			ps.setString(5,c.getAccounttype());
 			status = ps.executeUpdate();
 			conn.close();
 		}catch(Exception e){
@@ -32,12 +34,12 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public Customer validateCustomer(Login login) {
-		Customer c = new Customer();
+	public User validateUser(Login login) {
+		User c = new User();
 		try{
 			conn = db.getConnection();
-			ps =conn.prepareStatement("select * from customer where userId=? and password=?");
-			ps.setString(1, login.getUsername());
+			ps =conn.prepareStatement("select userId,password,name from user where userId=? and password=?");
+			ps.setInt(1, login.getUsername());
 			ps.setString(2, login.getPassword());
 
 			ResultSet rs = ps.executeQuery();
