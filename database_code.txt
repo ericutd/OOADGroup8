@@ -1,6 +1,7 @@
 create table user (
 	userId int,
     name varchar(250),
+    username varchar(250),
     password varchar(250),
     email varchar(250),
     accountType varchar(250),
