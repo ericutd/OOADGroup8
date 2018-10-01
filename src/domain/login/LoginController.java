@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Login
@@ -28,11 +29,13 @@ public class LoginController extends HttpServlet {
 		Login login = new Login(username, pass);
 		User c = customerDao.validateUser(login);
 		
+		HttpSession session = request.getSession();
+		session.setAttribute("userId", username);
+
 		if(submitType.equals("login") && c!=null && c.getName()!=null){
 			request.setAttribute("message", "Hello "+c.getName());
 			VehicleDao vehicleDao = new VehicleDao();
 			Vehicle v = vehicleDao.VehicleDetails(login);
-			request.setAttribute("userId", username);
 			request.setAttribute("vehicleDetails", v.getMake() + " "+ v.getModel());
 			request.setAttribute("licenseNum", v.getLicenseNum());
 			request.getRequestDispatcher("welcome.jsp").forward(request, response);
