@@ -38,6 +38,7 @@
 	Year: <input type="text" name="year"> <br>
 	<div id="year_error"></div><br>
 	
+	<input type="button" name="add another vehicle" onclick="vehicleForm()">
 	<input type="submit" name="submit" value="register" >
 	<input type="reset" name="reset">
 	
