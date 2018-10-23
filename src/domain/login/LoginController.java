@@ -36,6 +36,7 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("message", "Hello "+c.getName());
 			VehicleDao vehicleDao = new VehicleDao();
 			Vehicle v = vehicleDao.VehicleDetails(login);
+			request.setAttribute("acctType", c.getAccounttype());
 			request.setAttribute("vehicleDetails", v.getMake() + " "+ v.getModel());
 			request.setAttribute("licenseNum", v.getLicenseNum());
 			request.getRequestDispatcher("welcome.jsp").forward(request, response);

@@ -49,4 +49,21 @@ public class VehicleDao {
 		}
 		return status;
 	}
+	
+	public void updateVehicleDetails(Vehicle v) {
+		try{
+			conn = db.getConnection();
+			ps =conn.prepareStatement("update vehicle set licenseNum=?, make=?, model= ?, year=?, color=? where ownerId=?");
+			ps.setString(1, v.getLicenseNum());
+			ps.setString(2, v.getMake());
+			ps.setString(3, v.getModel());
+			ps.setString(4, v.getYear());
+			ps.setString(5, v.getColor());
+			ps.setInt(6, v.getOwnerid());
+			ps.executeUpdate();
+			conn.close();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+	}
 }

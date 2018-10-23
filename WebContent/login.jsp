@@ -17,7 +17,6 @@
 	${message}<br>
 	${successMessage}<br>
 	
-	
 	UserId: <input type="text" name="userid" id="userid"><br>
 	Password: <input type="password" name="password" id="password"><br>
 	<input type="submit" name="submit" value="login"><br>
