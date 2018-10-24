@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Login
@@ -22,12 +23,15 @@ public class LoginController extends HttpServlet {
 		
 		UserDao customerDao = new UserDaoImpl();
 		
-		int username = Integer.parseInt(request.getParameter("username"));
+		int username = Integer.parseInt(request.getParameter("userid"));
 		String pass = request.getParameter("password");
 		String submitType = request.getParameter("submit");
 		Login login = new Login(username, pass);
 		User c = customerDao.validateUser(login);
 		
+		HttpSession session = request.getSession();
+		session.setAttribute("userId", username);
+
 		if(submitType.equals("login") && c!=null && c.getName()!=null){
 			request.setAttribute("message", "Hello "+c.getName());
 			VehicleDao vehicleDao = new VehicleDao();
@@ -36,10 +40,20 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("licenseNum", v.getLicenseNum());
 			request.getRequestDispatcher("welcome.jsp").forward(request, response);
 		}else if(submitType.equals("register")){
+			c.setUserid(Integer.parseInt(request.getParameter("userid")));
 			c.setName(request.getParameter("name"));
-			c.setUsername(request.getParameter("username"));
 			c.setPassword(request.getParameter("password"));
+			c.setEmail(request.getParameter("email"));
+			c.setAccounttype(request.getParameter("dropdown"));
 			customerDao.register(c);
+			Vehicle v=new Vehicle();
+			VehicleDao vDao= new VehicleDao();
+			v.setLicenseNum(request.getParameter("licnum"));
+			v.setMake(request.getParameter("make"));
+			v.setModel(request.getParameter("model"));
+			v.setYear(request.getParameter("year"));
+			v.setColor(request.getParameter("color"));
+			vDao.register(v, Integer.parseInt(request.getParameter("userid")));
 			request.setAttribute("successMessage", "Registration done, please login!");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}else{
