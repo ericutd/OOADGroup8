@@ -56,5 +56,13 @@ public class UserDaoImpl implements UserDao {
 		}
 		return c;
 	}
+	
+	public int getUserId(String email){
+		int userId;
+		try{
+			conn = db.getConnection();
+			ps =conn.prepareStatement("select userId from user where email=?");
+			ps.setUserId(1, email);
+			ResultSet rs = ps.executeQuery();
 
 }
