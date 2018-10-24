@@ -29,8 +29,9 @@ public class LoginController extends HttpServlet {
 		Login login = new Login(username, pass);
 		User c = customerDao.validateUser(login);
 		
+		//int userid= getUserId(email);
 		HttpSession session = request.getSession();
-		session.setAttribute("userId", username);
+		session.setAttribute("userId", userid);
 
 		if(submitType.equals("login") && c!=null && c.getName()!=null){
 			request.setAttribute("message", "Hello "+c.getName());
