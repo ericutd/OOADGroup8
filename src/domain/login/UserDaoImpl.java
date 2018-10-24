@@ -38,8 +38,8 @@ public class UserDaoImpl implements UserDao {
 		User c = new User();
 		try{
 			conn = db.getConnection();
-			ps =conn.prepareStatement("select userId,password,name from user where userId=? and password=?");
-			ps.setInt(1, login.getUsername());
+			ps =conn.prepareStatement("select email,password,name from user where email=? and password=?");
+			ps.setInt(4, login.getEmail());
 			ps.setString(2, login.getPassword());
 
 			ResultSet rs = ps.executeQuery();
