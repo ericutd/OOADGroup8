@@ -18,7 +18,7 @@ public class ParkingSpotsDao {
 		int status = 0;
 		String number = request.getParameter("number");
 		int no = Integer.parseInt(number);
-		while(no != 0)
+		while(no > 0)
 		{
 			try{
 				conn = db.getConnection();
