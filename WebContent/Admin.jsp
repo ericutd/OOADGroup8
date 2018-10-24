@@ -34,6 +34,7 @@
 				<option>Gold</option>
 				<option>Orange</option>
 				<option>Purple</option>
+				<option>Vistor</option>
 			</select>
 			<button type="submit" onclick="Add()">Add</button>
 		</form>
