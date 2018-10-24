@@ -16,7 +16,9 @@
 		<form name="addSpots" action="SpotsController" method="post">
 			Lot Id:
 			<select name="id">
-				
+				<c:forEach items="${listId}" var="lotId">
+            				<option>${lotId}</option>
+        			</c:forEach>
 			</select>
 			No. of Spots:
 			<select name="number">
