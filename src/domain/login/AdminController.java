@@ -19,7 +19,7 @@ public class AdminController extends HttpServlet {
 	public AdminController() {}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ParkingSpotsDao  psDao = new CategoryDAO();
+		ParkingSpotsDao  psDao = new ParkingSpotsDAO();
 
 		try {
 
