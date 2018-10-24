@@ -34,9 +34,12 @@ public class AdminController extends HttpServlet {
 		    throw new ServletException(e);
         }
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int number = Integer.parseInt(request.getParameter("id"));
-		String colorPass = request.getParameter("permit");
-		ParkingSpots spot = new 
+		ParkingSpots spot = new ParkingSpots();
+		ParkingSpotsDao psDao = new ParkingSpotsDao();
+		spot.setParkingSpotId(Integer.parseInt(request.getParameter("id")));
+		spot.setColorClass(request.getParameter("permit"));
+		psDao.Add(spot);
+		request.getRequestDispatcher("Admin.jsp").forward(request, response);
 	}
 
 }
