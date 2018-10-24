@@ -16,7 +16,7 @@ public class ParkingSpotsDao {
 	
 	public int Add(ParkingSpots p){
 		int status = 0;
-		String number = request.getParameter("id");
+		String number = request.getParameter("number");
 		int no = Integer.parseInt(number);
 		while(no != 0)
 		{
