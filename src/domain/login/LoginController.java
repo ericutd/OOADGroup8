@@ -23,7 +23,7 @@ public class LoginController extends HttpServlet {
 		
 		UserDao customerDao = new UserDaoImpl();
 		
-		int username = Integer.parseInt(request.getParameter("userid"));
+		String email = request.getParameter("email");
 		String pass = request.getParameter("password");
 		String submitType = request.getParameter("submit");
 		Login login = new Login(username, pass);
