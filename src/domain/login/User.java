@@ -6,16 +6,16 @@ package domain.login;
  */
 public class User {
 
-	private String username;
+	private int userId;
 	private String password;
 	private String name;
 	private String email;
 	private String accountType;
-	public String getUsername() {
-		return username;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public String getPassword() {
 		return password;
