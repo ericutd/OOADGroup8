@@ -31,7 +31,7 @@ public class ParkingSpots {
 	public void setOccupied(boolean occupied){
 		this.occupied = occupied;
 	}
-	public String getColotPass(){
+	public String getColorPass(){
 		return colorClass;
 	}
 	public void setColorPass(String colorClass){
