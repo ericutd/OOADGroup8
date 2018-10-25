@@ -19,7 +19,7 @@ public class AdminController extends HttpServlet {
 	public AdminController() {}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ParkingSpotsDao  psDao = new ParkingSpotsDAO();
+		AdminDao  psDao = new AdminDAO();
 
 		try {
 
@@ -34,8 +34,8 @@ public class AdminController extends HttpServlet {
 		    throw new ServletException(e);
         }
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ParkingSpots spot = new ParkingSpots();
-		ParkingSpotsDao psDao = new ParkingSpotsDao();
+		Admin spot = new Admin();
+		AdminDao psDao = new AdminDao();
 		spot.setParkingSpotId(Integer.parseInt(request.getParameter("id")));
 		spot.setColorClass(request.getParameter("permit"));
 		psDao.Add(spot);
