@@ -1,6 +1,6 @@
 package domain.login;
 
-public class ParkingSpots {
+public class Admin {
 	private int parkingSpotId;
 	private int parkingLotId;
 	private String LicenseNo;
