@@ -61,8 +61,14 @@ public class UserDaoImpl implements UserDao {
 		int userId;
 		try{
 			conn = db.getConnection();
-			ps =conn.prepareStatement("select userId from user where email=?");
-			ps.setUserId(1, email);
-			ResultSet rs = ps.executeQuery();
-
+			String sql = "select userId from user where email=?";
+			Statement statement = conn.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			userId = result.getInt("userId");
+		}catch (SQLException ex) {
+		    ex.printStackTrace();
+		    throw ex;
+		}
+		return userId;
+	}
 }
