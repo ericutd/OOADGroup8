@@ -38,8 +38,9 @@ public class AdminDao {
 		List<int> lotId = new ArrayList<>();
 
 		try{
+			conn = db.getConnection();
 			String sql = "SELECT parkingLotId FROM parkingLot";
-			Statement statement = connection.createStatement();
+			Statement statement = conn.createStatement();
 			ResultSet result = statement.executeQuery(sql);
 
 			while (result.next()) {
