@@ -14,7 +14,7 @@ public class ParkingSpotsDao {
 	static PreparedStatement ps;
 	DbManager db = new DbManager();
 	
-	public int Add(ParkingSpots p){
+	public int Add(Admin p){
 		int status = 0;
 		String number = request.getParameter("number");
 		int no = Integer.parseInt(number);
