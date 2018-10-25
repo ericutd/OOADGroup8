@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParkingSpotsDao {
+public class AdminDao {
 	static Connection conn;
 	static PreparedStatement ps;
 	DbManager db = new DbManager();
