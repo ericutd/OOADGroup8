@@ -10,17 +10,17 @@
 </head>
 <body>
 <form name="updateuserform" action="UserController" method="post" >
-	<br>${message}<br>
+	
 	<h1>Parking Management Service</h1>
 	<h2>Manage Account</h2>
 	<h3>Manage User Profile:</h3>
 	
 	<div id="username_error"></div><br>
-	Name: <input type="text" name="name"><br>
+	Name: <input type="text" name="name" ><br>
 	
-	Password: <input type="password" name="password" id="password"> 
+	Password: <input type="password" name="password" id="password" > 
 	<br>
-	Email: <input type="text" name="email" id ="email">
+	Email: <input type="text" name="email" id ="email" >
 	<br>
 	
 	<input type="submit" name="submit" value="Update UserDetails" >	

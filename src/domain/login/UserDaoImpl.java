@@ -70,4 +70,24 @@ public class UserDaoImpl implements UserDao {
 			System.out.println(e);
 		}
 	}
+	
+	public User getUserDetails(int userId) {
+		User c = new User();
+		try{
+			conn = db.getConnection();
+			ps =conn.prepareStatement("select name,password,email from user where userId=? ");
+			ps.setInt(1, userId);
+
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				c.setName(rs.getString(1));
+				c.setPassword(rs.getString(2));
+				c.setEmail(rs.getString(3));
+			}
+			conn.close();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return c;
+	}
 }

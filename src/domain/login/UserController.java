@@ -20,7 +20,7 @@ public class UserController extends HttpServlet {
     
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("I am in User Controller");
 		UserDaoImpl userDao = new UserDaoImpl();
 		HttpSession session= request.getSession();
 		int userid = (int)session.getAttribute("userId");

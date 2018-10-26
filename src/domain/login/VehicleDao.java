@@ -3,6 +3,9 @@ package domain.login;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import com.mysql.fabric.xmlrpc.base.Array;
 
 import db.DbManager;
 
@@ -11,24 +14,29 @@ public class VehicleDao {
 	static PreparedStatement ps;
 	DbManager db = new DbManager();
 
-	public Vehicle VehicleDetails(Login login) {
-		Vehicle  v= new Vehicle();
+	public Vehicle[] VehicleDetails(Login login) {
+		ArrayList<Vehicle> vi= new ArrayList<>();
 		try{
 			conn = db.getConnection();
 			ps =conn.prepareStatement("select make,model,licenseNum from vehicle where ownerId=? ");
 			ps.setInt(1, login.getUsername());
 
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()){
-				v.setMake(rs.getString(1));
-				v.setModel(rs.getString(2));
-				v.setLicenseNum(rs.getString(3));
-			}
+			
+				while(rs.next()){
+					Vehicle v = new Vehicle();
+					v.setMake(rs.getString(1));
+					v.setModel(rs.getString(2));
+					v.setLicenseNum(rs.getString(3));
+					vi.add(v);
+				}
+				
 			conn.close();
+			
 		}catch(Exception e){
 			System.out.println(e);
 		}
-		return v;
+		return vi.toArray(new Vehicle[vi.size()]);
 	}
 	
 	public int register(Vehicle v,int userId) {

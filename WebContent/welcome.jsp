@@ -1,3 +1,4 @@
+<%@ page import="java.util.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -34,11 +35,11 @@
             if(acctType.equals("Admin")){
             %>
               <li class="nav-item" >
-              <a class="nav-link" href="manageparking.jsp">Manage Parking</a>
+              <a class="nav-link" href="admin.jsp">Manage Parking</a>
             </li>
             <% }else{ %>
               <li class="nav-item" style="display:none;">
-              <a class="nav-link" href="manageparking.jsp">Manage Parking</a>
+              <a class="nav-link" href="admin.jsp">Manage Parking</a>
             </li>
             <%} %>
             <li class="nav-item">
@@ -49,15 +50,22 @@
       </div>
     </nav>
 
+	<%  ArrayList<String> vDetails = new ArrayList<>();
+		vDetails=(ArrayList)request.getAttribute("vehicleDetails"); %>
+	<%  ArrayList<String> licnum = new ArrayList<>();
+		licnum=(ArrayList)request.getAttribute("licenseNum"); %>
 	<div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
           <h2 class="mt-5">${message} !!</h2>
+         
           <p class="lead"> Registered Vehicles:</p>
-          <ul class="list-unstyled">
-            <li> ${vehicleDetails}</li>
-            <li>License Number: ${licenseNum }</li>
-          </ul>
+           <% for(int i=0;i<vDetails.size();i++){%>
+	          <ol class="list-unstyled">
+	            <li><%=vDetails.get(i)%></li>
+	            <li>License Number: <%=licnum.get(i)%></li>
+	          </ol>
+          <%} %>
         </div>
       </div>
     </div>

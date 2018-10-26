@@ -1,6 +1,8 @@
 package domain.login;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +23,7 @@ public class LoginController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		UserDao customerDao = new UserDaoImpl();
-		
+		UserDao customerDao = new UserDaoImpl();		
 		int username = Integer.parseInt(request.getParameter("userid"));
 		String pass = request.getParameter("password");
 		String submitType = request.getParameter("submit");
@@ -31,14 +32,20 @@ public class LoginController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("userId", username);
-
 		if(submitType.equals("login") && c!=null && c.getName()!=null){
 			request.setAttribute("message", "Hello "+c.getName());
 			VehicleDao vehicleDao = new VehicleDao();
-			Vehicle v = vehicleDao.VehicleDetails(login);
+			Vehicle[] v = vehicleDao.VehicleDetails(login);
 			request.setAttribute("acctType", c.getAccounttype());
-			request.setAttribute("vehicleDetails", v.getMake() + " "+ v.getModel());
-			request.setAttribute("licenseNum", v.getLicenseNum());
+			ArrayList<String> vehicleDetails= new ArrayList<>();
+			ArrayList<String> licenseNum= new ArrayList<>();
+			
+			for(int i=0;i<v.length;i++) {
+				vehicleDetails.add(v[i].getMake()+" "+v[i].getModel());
+				licenseNum.add(v[i].getLicenseNum());
+			}
+			request.setAttribute("vehicleDetails", vehicleDetails);
+			request.setAttribute("licenseNum", licenseNum);
 			request.getRequestDispatcher("welcome.jsp").forward(request, response);
 		}else if(submitType.equals("register")){
 			c.setUserid(Integer.parseInt(request.getParameter("userid")));

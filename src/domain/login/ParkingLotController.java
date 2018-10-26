@@ -25,7 +25,7 @@ public class ParkingLotController extends HttpServlet {
 		
 		ParkingLotDao plDao=new ParkingLotDao();
 		plDao.insertParkingLot(noOfLots);
-		response.sendRedirect("manageparking.jsp");
+		response.sendRedirect("admin.jsp");
 	}
 
 }
