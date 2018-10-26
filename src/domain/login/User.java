@@ -5,19 +5,13 @@ package domain.login;
  *
  */
 public class User {
-	private int userid;
-	private String username;
+	private int userId;
 	private String password;
 	private String name;
 	private String email;
 	private String accounttype;
 	
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	
 	public String getPassword() {
 		return password;
 	}
@@ -42,11 +36,11 @@ public class User {
 	public void setAccounttype(String accounttype) {
 		this.accounttype = accounttype;
 	}
-	public int getUserid() {
-		return userid;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUserId(int userid) {
+		this.userId = userid;
 	}
 
 	

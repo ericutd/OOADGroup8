@@ -24,18 +24,22 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		UserDao customerDao = new UserDaoImpl();		
-		int username = Integer.parseInt(request.getParameter("userid"));
+		String email = request.getParameter("email");
 		String pass = request.getParameter("password");
 		String submitType = request.getParameter("submit");
-		Login login = new Login(username, pass);
+		Login login = new Login(email, pass);	
+		
+		UserDaoImpl uDao = new UserDaoImpl();
+		int userid= uDao.getUserId(email);
+		HttpSession session = request.getSession();
+		session.setAttribute("userId", userid);
+		
 		User c = customerDao.validateUser(login);
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("userId", username);
 		if(submitType.equals("login") && c!=null && c.getName()!=null){
 			request.setAttribute("message", "Hello "+c.getName());
 			VehicleDao vehicleDao = new VehicleDao();
-			Vehicle[] v = vehicleDao.VehicleDetails(login);
+			Vehicle[] v = vehicleDao.VehicleDetails(userid);
 			request.setAttribute("acctType", c.getAccounttype());
 			ArrayList<String> vehicleDetails= new ArrayList<>();
 			ArrayList<String> licenseNum= new ArrayList<>();
@@ -48,11 +52,10 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("licenseNum", licenseNum);
 			request.getRequestDispatcher("welcome.jsp").forward(request, response);
 		}else if(submitType.equals("register")){
-			c.setUserid(Integer.parseInt(request.getParameter("userid")));
 			c.setName(request.getParameter("name"));
 			c.setPassword(request.getParameter("password"));
 			c.setEmail(request.getParameter("email"));
-			c.setAccounttype(request.getParameter("acctype"));
+			c.setAccounttype(request.getParameter("dropdown"));
 			customerDao.register(c);
 			Vehicle v=new Vehicle();
 			VehicleDao vDao= new VehicleDao();
@@ -61,7 +64,7 @@ public class LoginController extends HttpServlet {
 			v.setModel(request.getParameter("model"));
 			v.setYear(request.getParameter("year"));
 			v.setColor(request.getParameter("color"));
-			vDao.register(v, Integer.parseInt(request.getParameter("userid")));
+			vDao.register(v,userid);
 			request.setAttribute("successMessage", "Registration done, please login!");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}else{

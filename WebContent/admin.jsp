@@ -17,7 +17,7 @@
 	</div>
 	<button type="button" onclick='document.getElementById("spots").style.visibility = "visible"'>Add parking spots</button>
 	<div id="spots" style="visibility: hidden">
-		<form name="addSpots" action="SpotsController" method="post">
+		<form name="addSpots" action="AdminController" method="post">
 			Lot Id: <select name="id">
 				<c:forEach items="${listId}" var="lotId">
 					<option>${lotId}</option>

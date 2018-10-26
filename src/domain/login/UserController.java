@@ -32,7 +32,7 @@ public class UserController extends HttpServlet {
 		u.setName(name);
 		u.setEmail(email);
 		u.setPassword(pass);
-		u.setUserid(userid);
+		u.setUserId(userid);
 		userDao.updateUserDetails(u);
 		response.sendRedirect("manageaccount.jsp");
 	}

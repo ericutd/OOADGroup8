@@ -16,7 +16,6 @@
 	<h3>User Information:</h3>
 	
 	<div id="username_error"></div><br>
-	UserId: <input type="text" name="userid"><br>
 	Name: <input type="text" name="name"><br>
 	
 	Password: <input type="password" name="password" id="password"> 
@@ -24,7 +23,11 @@
 	Re-Type Password: <input type="password" name="retry-password" id="retry-password"> <br>
 	Email: <input type="text" name="email" id ="email">
 	<br>
-	Account Type: <input type="text" name="acctype" id="acctype"> <br>
+	Account Type: <select name="dropdown" id ="dropdown">
+		<option>Student</option>
+		<option>Faculty/Staff</option>
+		<option>Visitor</option>
+	</select>
 	
 	<h3>Vehicle Information</h3>
     

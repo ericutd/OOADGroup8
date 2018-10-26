@@ -14,12 +14,12 @@ public class VehicleDao {
 	static PreparedStatement ps;
 	DbManager db = new DbManager();
 
-	public Vehicle[] VehicleDetails(Login login) {
+	public Vehicle[] VehicleDetails(int userid) {
 		ArrayList<Vehicle> vi= new ArrayList<>();
 		try{
 			conn = db.getConnection();
 			ps =conn.prepareStatement("select make,model,licenseNum from vehicle where ownerId=? ");
-			ps.setInt(1, login.getUsername());
+			ps.setInt(1, userid);
 
 			ResultSet rs = ps.executeQuery();
 			
