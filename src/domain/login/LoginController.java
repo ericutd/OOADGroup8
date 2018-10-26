@@ -29,7 +29,7 @@ public class LoginController extends HttpServlet {
 		Login login = new Login(username, pass);
 		User c = customerDao.validateUser(login);
 		
-		//int userid= getUserId(email);
+		int userid= getUserId(email);
 		HttpSession session = request.getSession();
 		session.setAttribute("userId", userid);
 
