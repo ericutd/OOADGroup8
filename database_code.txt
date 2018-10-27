@@ -1,22 +1,15 @@
-create table administrator (
-    userId int,
-    name varchar(250),
-    password varchar(250),
-    email varchar(250)
-    );
-    
 create table user (
-    userId int,
+    userId int auto_increment,
     name varchar(250),
     password varchar(250),
-    email varchar(250),
+    email varchar(250) unique,
     accountType varchar(250),
     
     primary key(userId)
     );
 
 create table permit (
-    permitId int,
+    permitId int auto_increment,
     ownerId int,
     price double,
     colorClass varchar(250),
@@ -27,7 +20,7 @@ create table permit (
     );
     
 create table vehicle (
-    ownerId int,
+    ownerId int auto_increment,
     permitId int,
     licenseNum varchar(10),
     make varchar(10),
@@ -41,13 +34,13 @@ create table vehicle (
     );
     
 create table parkingLot (
-    parkingLotId int,
+    parkingLotId int auto_increment,
     
     primary key(parkingLotId)
     );
 
 create table parkingSpot (
-    parkingSpotId int,
+    parkingSpotId int auto_increment,
     parkingLotId int,
     currentVehicle varchar(10),
     occupied boolean,
