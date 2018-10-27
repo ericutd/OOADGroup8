@@ -1,4 +1,4 @@
-package domain.login;
+package domain.admin;
 import java.io.IOException;
 import java.sql.SQLException;
 

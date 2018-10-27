@@ -1,4 +1,4 @@
-package domain.login;
+package domain.admin;
  import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -1,4 +1,4 @@
-package domain.login;
+package domain.admin;
  public class Admin {
 	private int parkingSpotId;
 	private int parkingLotId;

@@ -64,7 +64,8 @@ public class LoginController extends HttpServlet {
 			v.setModel(request.getParameter("model"));
 			v.setYear(request.getParameter("year"));
 			v.setColor(request.getParameter("color"));
-			vDao.register(v,userid);
+			int currentUserid= uDao.getUserId(c.getEmail());
+			vDao.register(v,currentUserid);
 			request.setAttribute("successMessage", "Registration done, please login!");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}else{
