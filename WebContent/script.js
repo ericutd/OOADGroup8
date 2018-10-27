@@ -122,14 +122,8 @@ function vehicleForm(){
 	form.appendChild(buttonelement);
 
 }
-function hide(){
-	var x = document.getElementById("spots");
-	x.style.visibility = 'hidden';
-}
-function addSpots() {
-	var y = document.getElementById("spots");
-	y.style.visibility = 'visible';
-}
-function Add(){
 
+function Add(){
+	var x = document.getElementById("addSpots");
+	x.setAttribute("method", "post");
 }
