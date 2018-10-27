@@ -13,7 +13,7 @@
 	</div>
 	<button type="button" onclick="addSpots()">Add parking spots</button>
 	<div id="spots">
-		<form name="addSpots" action="SpotsController" method="post">
+		<form name="addSpots" action="SpotsController" method="get">
 			Lot Id:
 			<select name="id">
 				<c:forEach items="${listId}" var="lotId">
