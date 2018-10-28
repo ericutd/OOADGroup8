@@ -1,9 +1,5 @@
-package Selection;
-/* Author: Zack Oldham
- * CS 6359.002
- * 10/24/2018
- * This class defines a Selection which stores relevant information needed to select a spot (validation is done in both this class and SelectionAssistant)
- */
+package selection;
+
 
 enum pass {Visitor, Green, Gold, Orange, Purple};
 

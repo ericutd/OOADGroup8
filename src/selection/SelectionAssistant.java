@@ -1,4 +1,5 @@
-package Selection;
+package selection;
+
 
 /* Author: Zack Oldham
  * CS 6359.002

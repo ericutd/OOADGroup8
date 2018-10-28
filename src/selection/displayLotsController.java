@@ -1,9 +1,5 @@
-package Selection;
-/* Author: Zack Oldham
- * CS 6359.002
- * 10/24/2018
- * This class defines the displaySpotsController which displays all spots in the lot of the user's choice. 
- */
+package selection;
+
 
 
 
@@ -14,33 +10,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/displaySpotsController")
-public class displaySpotsController extends HttpServlet
+@WebServlet("/displayLotsController")
+public class displayLotsController extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	
 	
 	
-	public displaySpotsController(){}
+	public displayLotsController(){}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{
-		int lotId = Integer.parseInt(request.getParameter("lotId"));
-		
+	{	
 		try
 	    {		
 			SelectionAssistant SA = new SelectionAssistant();
-			String spots[][] = SA.listSpots(lotId);
+			int lots[] = SA.listLots();
 			
-			request.setAttribute("message", "SpotId\tColor\n");
+			request.setAttribute("message", "LotId\n");
 			request.getRequestDispatcher("select.jsp").forward(request, response);
 			
-			for(int i = 0; i < spots.length; i++)
+			for(int i = 0; i < lots.length; i++)
 			{
-				request.setAttribute("message", spots[i][0] + "\t");
-				request.getRequestDispatcher("select.jsp").forward(request, response);
-				request.setAttribute("message", spots[i][1] + "\n");
+				request.setAttribute("message", lots[i] + "\n");
 				request.getRequestDispatcher("select.jsp").forward(request, response);
 			}
 		}

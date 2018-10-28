@@ -1,9 +1,5 @@
-package Selection;
-/* Author: Zack Oldham
- * CS 6359.002
- * 10/24/2018
- * This class defines the displayLotsController which displays all available parking lots 
- */
+package selection;
+
 
 
 
@@ -14,29 +10,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/displayLotsController")
-public class displayLotsController extends HttpServlet
+@WebServlet("/displaySpotsController")
+public class displaySpotsController extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
 	
 	
 	
-	public displayLotsController(){}
+	public displaySpotsController(){}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
-	{	
+	{
+		int lotId = Integer.parseInt(request.getParameter("lotId"));
+		
 		try
 	    {		
 			SelectionAssistant SA = new SelectionAssistant();
-			int lots[] = SA.listLots();
+			String spots[][] = SA.listSpots(lotId);
 			
-			request.setAttribute("message", "LotId\n");
+			request.setAttribute("message", "SpotId\tColor\n");
 			request.getRequestDispatcher("select.jsp").forward(request, response);
 			
-			for(int i = 0; i < lots.length; i++)
+			for(int i = 0; i < spots.length; i++)
 			{
-				request.setAttribute("message", lots[i] + "\n");
+				request.setAttribute("message", spots[i][0] + "\t");
+				request.getRequestDispatcher("select.jsp").forward(request, response);
+				request.setAttribute("message", spots[i][1] + "\n");
 				request.getRequestDispatcher("select.jsp").forward(request, response);
 			}
 		}

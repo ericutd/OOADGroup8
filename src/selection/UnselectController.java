@@ -1,9 +1,5 @@
-package Selection;
-/* Author: Zack Oldham
- * CS 6359.002
- * 10/24/2018
- * This class defines the UnselectController which allows the user to unselect a spot they were parked in and are now leaving 
- */
+package selection;
+
 
 
 

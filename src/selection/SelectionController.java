@@ -1,9 +1,5 @@
-package Selection;
-/* Author: Zack Oldham
- * CS 6359.002
- * 10/24/2018
- * This class defines the selectionController which allows the user to select a spot
- */
+package selection;
+
 
 
 
