@@ -36,20 +36,20 @@ public class SelectionController extends HttpServlet
 		int parkingLotId = Integer.parseInt(request.getParameter("parkingLotId"));
 		int parkingSpotId = Integer.parseInt(request.getParameter("parkingSpotId"));
 		HttpSession session = request.getSession();
-		String licNum = "FFF123"; //(String)session.getAttribute("licenseNumber");
-		String permitColor = "Green"; //(String)session.getAttribute("permitColor");
+		String licNum = (String)session.getAttribute("licenseNumber");
+		String permitColor = (String)session.getAttribute("permitColor");
 		
 		//attempt to make selection
 		try
 	    {	
-			/*conn = db.getConnection();
+			conn = db.getConnection();
 			ps = conn.prepareStatement("select colorClass from permit where ownerId=?");
 			ps.setInt(1, 12345);
 			ResultSet rs = ps.executeQuery();
 			conn.close();
 			
 			rs.next();
-			String permitColor = rs.getString(1);*/
+			permitColor = rs.getString(1);
 			
 			Selection S = new Selection(licNum, parkingLotId, parkingSpotId, permitColor);
 			
