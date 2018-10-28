@@ -1,4 +1,4 @@
-package Reservation;
+package reservation;
 /* Author: Zack Oldham
  * CS 6359.002
  * 09/30/2018
