@@ -45,8 +45,5 @@ public class displayLotsController extends HttpServlet
 			request.setAttribute("message", " " + ex);
 			request.getRequestDispatcher("select.jsp").forward(request, response);
 		}
-			
-		request.setAttribute("message", " Success! You have freed your spot!\n"); 
-		request.getRequestDispatcher("select.jsp").forward(request, response);
 	}
 }
