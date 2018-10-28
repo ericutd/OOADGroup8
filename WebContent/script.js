@@ -1,16 +1,11 @@
 function regValidate() {
 
-	var username = document.forms["regform"]["username"].value;
 	var password = document.forms["regform"]["password"].value;
 	var rpassword = document.forms["regform"]["retry-password"].value;
 	var email = document.forms["regform"]["email"].value;
-	var accttype = document.forms["regform"]["accttype"].value;
+	var dropdown = document.forms["regform"]["dropdown"].value;
 	
-	if (username == "") {
-        alert("username must be filled out");
-        document.forms["regform"]["username"].focus();
-        return false;
-    }else if (password== "") {
+	if (password== "") {
         alert("password must be filled out");
         document.forms["regform"]["password"].focus();
         return false;
@@ -18,9 +13,9 @@ function regValidate() {
         alert("Email must be filled out");
         document.forms["regform"]["email"].focus();
         return false;
-    }else if (accttype== "") {
+    }else if (dropdown== "") {
         alert("Account Type must be filled out");
-        document.forms["regform"]["accttype"].focus();
+        document.forms["regform"]["dropdown"].focus();
         return false;
     }    
     else if (rpassword == "") {
@@ -34,12 +29,12 @@ function regValidate() {
     }
 }
 function loginValidate(){
-	var username = document.forms["loginform"]["username"].value;
+	var email = document.forms["loginform"]["email"].value;
 	var password = document.forms["loginform"]["password"].value;
 	
-	if (username == "") {
+	if (email == "") {
         alert("username must be filled out");
-        document.forms["loginform"]["username"].focus();
+        document.forms["loginform"]["email"].focus();
         return false;
     }else if (password== "") {
         alert("password must be filled out");

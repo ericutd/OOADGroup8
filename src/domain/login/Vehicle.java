@@ -1,6 +1,7 @@
 package domain.login;
 
 public class Vehicle {
+	private int ownerid;
 	private String make;
 	private String model;
 	private String licenseNum;
@@ -36,5 +37,11 @@ public class Vehicle {
 	}
 	public void setYear(String year) {
 		this.year = year;
+	}
+	public int getOwnerid() {
+		return ownerid;
+	}
+	public void setOwnerid(int ownerid) {
+		this.ownerid = ownerid;
 	}
 }
