@@ -1,16 +1,27 @@
 create table user (
-	userId int,
+    userId int auto_increment,
     name varchar(250),
-    username varchar(250),
     password varchar(250),
-    email varchar(250),
+    email varchar(250) unique,
     accountType varchar(250),
     
     primary key(userId)
     );
+
+create table permit (
+    permitId int auto_increment,
+    ownerId int,
+    price double,
+    colorClass varchar(250),
+    expirationDate datetime,
+    
+    primary key(permitId),
+    foreign key(ownerId) references user(userId)
+    );
     
 create table vehicle (
-	ownerId int,
+    ownerId int auto_increment,
+    permitId int,
     licenseNum varchar(10),
     make varchar(10),
     model varchar(10),
@@ -18,24 +29,24 @@ create table vehicle (
     color varchar(10),
     
     primary key(licenseNum),
-    foreign key(ownerId) references user(userId)
+    foreign key(ownerId) references user(userId),
+    foreign key(permitId) references permit(permitId)
     );
     
 create table parkingLot (
-	parkingLotId int,
+    parkingLotId int auto_increment,
     
     primary key(parkingLotId)
     );
 
 create table parkingSpot (
-	parkingLotId int,
-	parkingSpotId int,
-    price double,
-    reservedDate datetime,
-    reserved bool,
+    parkingSpotId int auto_increment,
+    parkingLotId int,
+    currentVehicle varchar(10),
+    occupied boolean,
+    colorClass varchar(250),
     
     primary key(parkingSpotId),
-    foreign key(parkingLotId) references parkingLot(parkingLotId)
+    foreign key(parkingLotId) references parkingLot(parkingLotId),
+    foreign key(currentVehicle) references vehicle(licenseNum)
     );
-    
-    
