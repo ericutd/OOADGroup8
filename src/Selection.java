@@ -9,7 +9,7 @@ enum pass {Visitor, Green, Gold, Orange, Purple};
 
 public class Selection 
 {
-	private int userId = 0;
+	private String licNum = "";
 	private pass colorClass = null;
 	private int parkingLotId = 0;
 	private int parkingSpotId = 0;
@@ -17,17 +17,17 @@ public class Selection
 	
 	public Selection(){}
 	
-	public Selection(int uId, int lId, int sId, String c) throws ParkingException
+	public Selection(String lN, int lId, int sId, String c) throws ParkingException
 	{
-		this.userId = uId;
+		this.licNum = lN;
 		this.parkingLotId = lId;
 		this.parkingSpotId = sId;
 		colorClass = validateColor(c);
 	}
 	
-	public int getUserId()
+	public String getLicNum()
 	{
-		return this.userId;
+		return this.licNum;
 	}
 	
 	public int getParkingLotId()

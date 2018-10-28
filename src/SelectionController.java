@@ -33,23 +33,25 @@ public class SelectionController extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		int parkingLotId = Integer.parseInt(request.getParameter("lotId"));
-		int parkingSpotId = Integer.parseInt(request.getParameter("spotId"));
+		int parkingLotId = Integer.parseInt(request.getParameter("parkingLotId"));
+		int parkingSpotId = Integer.parseInt(request.getParameter("parkingSpotId"));
 		HttpSession session = request.getSession();
-		int userId = (int)session.getAttribute("userId");
-		//is there a session variable for the permitColor?
+		String licNum = "FFF123"; //(String)session.getAttribute("licenseNumber");
+		String permitColor = "Green"; //(String)session.getAttribute("permitColor");
 		
 		//attempt to make selection
 		try
 	    {	
-			conn = db.getConnection();
+			/*conn = db.getConnection();
 			ps = conn.prepareStatement("select colorClass from permit where ownerId=?");
-			ps.setInt(1, userId);
+			ps.setInt(1, 12345);
 			ResultSet rs = ps.executeQuery();
+			conn.close();
 			
-			String permitColor = rs.getString(1);
+			rs.next();
+			String permitColor = rs.getString(1);*/
 			
-			Selection S = new Selection(userId, parkingLotId, parkingSpotId, permitColor);
+			Selection S = new Selection(licNum, parkingLotId, parkingSpotId, permitColor);
 			
 			SelectionAssistant SA = new SelectionAssistant();
 			SA.selectSpot(S);
@@ -57,10 +59,10 @@ public class SelectionController extends HttpServlet
 		catch(Exception ex)
 		{
 			request.setAttribute("message", " " + ex);
-			request.getRequestDispatcher("selection.jsp").forward(request, response);
+			request.getRequestDispatcher("select.jsp").forward(request, response);
 		}
 			
 		request.setAttribute("message", " Success! You have occupied spot number " + parkingSpotId + "in lot number " + parkingLotId + "."); 
-		request.getRequestDispatcher("selection.jsp").forward(request, response);
+		request.getRequestDispatcher("successReserve.jsp").forward(request, response);
 	}
 }

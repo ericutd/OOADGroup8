@@ -28,12 +28,12 @@ public class UnselectController extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		HttpSession session = request.getSession();
-		int userId = (int)session.getAttribute("userId");
+		String licNum = (String)session.getAttribute("licenseNumber");
 		
 		try
 	    {		
 			SelectionAssistant SA = new SelectionAssistant();
-			SA.freeSpot(userId);
+			SA.freeSpot(licNum);
 		}
 		catch(Exception ex)
 		{

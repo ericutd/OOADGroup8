@@ -49,23 +49,33 @@ public class SelectionAssistant
 			conn = db.getConnection();
 			
 			//grab the spot the user wishes to reserve
-			ps = conn.prepareStatement("SELECT Occupied, colorClass From parkingSpot WHERE parkingLotId=? AND parkingSpotId=?");
+			ps = conn.prepareStatement("SELECT occupied, colorClass From parkingSpot WHERE parkingLotId=? AND parkingSpotId=?");
 			ps.setInt(1, s.getParkingLotId());
 			ps.setInt(2, s.getParkingSpotId());
 			ResultSet rs = ps.executeQuery();
 			
-			//if spot was not taken, and the user has the right pass to park in that spot, reserve it for the user. 
-			if(!rs.getBoolean(1) && s.isEligible(rs.getString(2)))
+			if(!rs.next())
 			{
-				ps = conn.prepareStatement("UPDATE parkingSpot SET reserverId=?, Occupied=true WHERE parkingLotId=? AND parkingSpotId=?");
-				ps.setInt(1, s.getUserId());
-				ps.setInt(3, s.getParkingLotId());
-				ps.setInt(4, s.getParkingSpotId());
+				throw new ParkingException("Invalid parking lot or parking lot");
+			}
+			
+			boolean occupied = rs.getBoolean(1);
+			//if spot was not taken, and the user has the right pass to park in that spot, reserve it for the user. 
+			if(!occupied && s.isEligible(rs.getString(2)))
+			{
+				ps = conn.prepareStatement("UPDATE parkingSpot SET currentVehicle=?, occupied=True WHERE parkingLotId=? AND parkingSpotId=?");
+				ps.setString(1, s.getLicNum());
+				ps.setInt(2, s.getParkingLotId());
+				ps.setInt(3, s.getParkingSpotId());
 				ps.executeUpdate();
 			}
-			else //otherwise throw an exception stating that the spot was taken
+			else if(occupied) //otherwise throw an exception stating that the spot was taken
 			{
 				throw new ParkingException("Invalid Parking Exception: Lot " + s.getParkingLotId() + " spot " + s.getParkingSpotId() + " is already Occupied");
+			}
+			else
+			{
+				throw new ParkingException("Invalid Parking Exception: You are not eligible to park in this colorClass.");
 			}
 			
 			conn.close();
@@ -82,13 +92,13 @@ public class SelectionAssistant
 	 * @return: none
 	 * throws ParkingException to indicate errors in attempting to free a spot, or SQL exception in the event of an underlying database error
 	 */
-	public void freeSpot(int userId) throws ParkingException, SQLException
+	public void freeSpot(String licNum) throws ParkingException, SQLException
 	{	
 		try
 		{
 			conn = db.getConnection();
-			ps = conn.prepareStatement("SELECT Occupied FROM parkingSpot WHERE reserverId=?");
-			ps.setInt(1, userId);
+			ps = conn.prepareStatement("SELECT occupied FROM parkingSpot WHERE currentVehicle=?");
+			ps.setString(1, licNum);
 			ResultSet rs = ps.executeQuery();
 			
 			if(!rs.next())
@@ -96,8 +106,8 @@ public class SelectionAssistant
 				throw new ParkingException("Parking Exception: You have no spot to free");
 			}
 			
-			ps = conn.prepareStatement("UPDATE parkingSpot SET ReserverId=NULL, Reserved=False where ReserverId=?");
-			ps.setInt(1,userId);
+			ps = conn.prepareStatement("UPDATE parkingSpot SET currentVehicle=NULL, occupied=False where currentVehicle=?");
+			ps.setString(1,licNum);
 			ps.executeUpdate();
 			
 			conn.close();
@@ -120,6 +130,7 @@ public class SelectionAssistant
 			conn = db.getConnection();
 			ps = conn.prepareStatement("SELECT * FROM parkingLot");
 			ResultSet rs = ps.executeQuery();
+			conn.close();
 			
 			if(!rs.next())
 			{
@@ -138,7 +149,6 @@ public class SelectionAssistant
 					output[i] = rs.getInt(1);
 					i++;
 				}
-				
 				return output;
 			}
 			
