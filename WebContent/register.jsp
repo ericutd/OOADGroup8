@@ -6,16 +6,25 @@
 <script type="text/javascript" src="script.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Register</title>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+       $('#UpdateVehicle').click(function() {
+			var cloneVehicle = '<form name="regform" action="LoginController" method="post" onsubmit="return regValidate()"> <div name="vehicleDiv" id=' + Math.random() + '> <br> License Number: <input type="text" name="licnum" id="licnum"> <br>Make: <input type="text" name="make" id="make"> <br>Model: <input type="text" name="model" id="model"> <br>Year: <input type="text" name="year" id="year"> <br>Color: <input type="text" name="color" id="color"> <br></div>' + '<input type="submit" name="submit" value="save" > </form>'
+			$('#vehicleList').append(cloneVehicle)
+		})
+   })
+</script>
+
 <body>
-<form name="regform" action="LoginController" method="post" onsubmit="return regValidate()">
+<form name="regform" action="LoginController" method="post">
 	<br>${message}<br>
 	<h1>Parking Management Service</h1>
 	<h2>User Registration</h2>
 	<h3>User Information:</h3>
 	
-	<div id="username_error"></div><br>
 	UserId: <input type="text" name="userid"><br>
 	Name: <input type="text" name="name"><br>
 	
@@ -28,13 +37,10 @@
 	
 	<h3>Vehicle Information</h3>
     
-    License Number: <input type="text" name="licnum" id="licnum"> <br>
-    Make: <input type="text" name="make" id="make"> <br>
-    Model: <input type="text" name="model" id="model"> <br>
-    Year: <input type="text" name="year" id="year"> <br>
-    Color: <input type="text" name="color" id="color"> <br>
+    <div id="vehicleList">
+		<button name="UpdateVehicleButton" value="Add" id="UpdateVehicle"> Add </button>
+	</div>
 	
-	<div id="password_error"></div><br>
 	<input type="submit" name="submit" value="register" >
 	<input type="reset" name="reset">
 	
