@@ -202,6 +202,54 @@ public class SelectionAssistant
 	}
 	
 	
+	/* Method to get the permitColor and licenseNumber of a given user. 
+	 * @param: the userId of the given user
+	 * @return: An array of strings that holds the licenseNumber of the user's vehicle and colorClass of their permit.
+	 * throws: ParkingException if that user did not have any info stored (invalid user) or SQL exception if query issue
+	 */
+	
+	public String[] getUserInfo(int uId) throws ParkingException, SQLException
+	{
+		String output[] = new String[2];
+		
+		try
+		{
+			conn = db.getConnection();
+			ps = conn.prepareStatement("SELECT licenseNum FROM vehicle WHERE ownerId=?");
+			ps.setInt(1, uId);
+			ResultSet rs = ps.executeQuery();
+				
+			if(!rs.next())
+			{
+				throw new ParkingException("Invalid userId");
+			}
+			else
+			{
+				output[0] = rs.getString(1);
+				
+				ps = conn.prepareStatement("SELECT ColorClass FROM permit WHERE ownerId=?");
+				ps.setInt(1, uId);
+				rs = ps.executeQuery();
+				
+				if(!rs.next())
+				{
+					throw new ParkingException("Invalid userId");
+				}
+				else
+				{
+					output[1] = rs.getString(1);
+				}
+			}
+			
+			return output;
+		}
+		catch(Exception ex)
+		{
+			throw ex;
+		}
+	}
+	
+	
 	
 	
 }

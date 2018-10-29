@@ -14,19 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import db.DbManager;
 
 @WebServlet("/SelectionController")
 public class SelectionController extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
-	static Connection conn; //connection to the database
-	static PreparedStatement ps; //prepared statement for issuing sql queries
-	DbManager db = new DbManager(); //DbManager object to initiate connection to database
-	
 	
 	public SelectionController(){}
 	
@@ -36,24 +28,16 @@ public class SelectionController extends HttpServlet
 		int parkingLotId = Integer.parseInt(request.getParameter("parkingLotId"));
 		int parkingSpotId = Integer.parseInt(request.getParameter("parkingSpotId"));
 		HttpSession session = request.getSession();
-		String licNum = "FFF123"; //(String)session.getAttribute("licenseNumber");
-		String permitColor = "Green"; //(String)session.getAttribute("permitColor");
+		int userId = (int)session.getAttribute("userId");
+		String[] usrInfo;
 		
 		//attempt to make selection
 		try
 	    {	
-			/*conn = db.getConnection();
-			ps = conn.prepareStatement("select colorClass from permit where ownerId=?");
-			ps.setInt(1, 12345);
-			ResultSet rs = ps.executeQuery();
-			conn.close();
-			
-			rs.next();
-			String permitColor = rs.getString(1);*/
-			
-			Selection S = new Selection(licNum, parkingLotId, parkingSpotId, permitColor);
-			
 			SelectionAssistant SA = new SelectionAssistant();
+			usrInfo = SA.getUserInfo(userId);
+			Selection S = new Selection(usrInfo[0], parkingLotId, parkingSpotId, usrInfo[1]);
+			
 			SA.selectSpot(S);
 		}
 		catch(Exception ex)
