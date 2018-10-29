@@ -6,14 +6,25 @@
 <script type="text/javascript" src="script.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Register</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Parking Management Service</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+      </div>
+    </nav>
+	
+
 <form name="regform" action="LoginController" method="post" onsubmit="return regValidate()">
 	<br>${message}<br>
-	<h1>Parking Management Service</h1>
-	<h2>User Registration</h2>
-	<h3>User Information:</h3>
+	<h3>User Registration</h3>
+	<h4>User Information:</h4>
 	
 	<div id="username_error"></div><br>
 	Name: <input type="text" name="name"><br>
@@ -28,8 +39,8 @@
 		<option>Faculty/Staff</option>
 		<option>Visitor</option>
 	</select>
-	
-	<h3>Vehicle Information</h3>
+	<br>
+	<h4>Vehicle Information</h4>
     
     License Number: <input type="text" name="licnum" id="licnum"> <br>
     Make: <input type="text" name="make" id="make"> <br>

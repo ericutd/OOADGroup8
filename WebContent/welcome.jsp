@@ -20,7 +20,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home
+              <a class="nav-link" href="">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -31,7 +31,9 @@
               <a class="nav-link" href="manageaccount.jsp">Manage Account</a>
             </li>
             <%
-            String acctType= (String)request.getAttribute("acctType");
+            //String acctType= (String)request.getAttribute("acctType");
+            HttpSession session1= request.getSession();
+    		String acctType = (String)session1.getAttribute("acctType");
             if(acctType.equals("Admin")){
             %>
               <li class="nav-item" >

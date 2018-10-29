@@ -5,15 +5,54 @@
 <head>
 <script type="text/javascript" src="script.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Register</title>
-
+<title>ManageAccount</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <form name="updateuserform" action="UserController" method="post" >
-	
-	<h1>Parking Management Service</h1>
-	<h2>Manage Account</h2>
-	<h3>Manage User Profile:</h3>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Parking Management Service</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="select.jsp">Select a Spot</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="manageaccount.jsp">Manage Account</a>
+            </li>
+            <%
+            //String acctType= (String)request.getAttribute("acctType");
+            HttpSession session1= request.getSession();
+    		String acctType = (String)session1.getAttribute("acctType");
+            if(acctType.equals("Admin")){
+            %>
+              <li class="nav-item" >
+              <a class="nav-link" href="admin.jsp">Manage Parking</a>
+            </li>
+            <% }else{ %>
+              <li class="nav-item" style="display:none;">
+              <a class="nav-link" href="admin.jsp">Manage Parking</a>
+            </li>
+            <%} %>
+            <li class="nav-item">
+              <a class="nav-link" href="logout.jsp">Logout</a> 
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+	<br>
+	<h4>Manage Account</h4>
+	<h6>Manage User Profile:</h6>
 	
 	<div id="username_error"></div><br>
 	Name: <input type="text" name="name" ><br>
@@ -24,11 +63,11 @@
 	<br>
 	
 	<input type="submit" name="submit" value="Update UserDetails" >	
-	</form>
+	</form><br>
 	
 <form name="updatevehicelform" action="VehicleController" method="post" >
 	
-	<h3>Manage Vehicles:</h3>
+	<h6>Manage Vehicles:</h6>
     
     License Number: <input type="text" name="licnum" id="licnum"> <br>
     Make: <input type="text" name="make" id="make"> <br>

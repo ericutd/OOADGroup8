@@ -40,7 +40,7 @@ public class LoginController extends HttpServlet {
 			request.setAttribute("message", "Hello "+c.getName());
 			VehicleDao vehicleDao = new VehicleDao();
 			Vehicle[] v = vehicleDao.VehicleDetails(userid);
-			request.setAttribute("acctType", c.getAccounttype());
+			session.setAttribute("acctType", c.getAccounttype());
 			ArrayList<String> vehicleDetails= new ArrayList<>();
 			ArrayList<String> licenseNum= new ArrayList<>();
 			
