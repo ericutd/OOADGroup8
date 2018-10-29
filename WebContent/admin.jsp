@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Manage Parking</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -49,6 +49,7 @@
       </div>
     </nav>
 	<br>
+	<h4>Manage Parking</h4>
 	<button type="button" onclick='document.getElementById("lots").style.visibility = "visible"'
 	>Add parking lots</button>
 	<div id="lots" style="visibility: hidden">
