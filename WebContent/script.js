@@ -1,11 +1,32 @@
+function validateReserve(){
+    var lotId = document.forms["reservationForm"]["lotId"].value;
+    var spotId = document.forms["reservationForm"]["spotId"].value;
+    
+    if (lotId == "") {
+        alert("lotId must be filled out");
+        document.forms["reservationForm"]["lotId"].focus();
+        return false;
+    }
+    if (spotId== "") {
+        alert("spotId must be filled out");
+        document.forms["reservationForm"]["spotId"].focus();
+        return false;
+    }
+}
+
 function regValidate() {
 
+	var username = document.forms["regform"]["username"].value;
 	var password = document.forms["regform"]["password"].value;
 	var rpassword = document.forms["regform"]["retry-password"].value;
 	var email = document.forms["regform"]["email"].value;
-	var dropdown = document.forms["regform"]["dropdown"].value;
+	var accttype = document.forms["regform"]["accttype"].value;
 	
-	if (password== "") {
+	if (username == "") {
+        alert("username must be filled out");
+        document.forms["regform"]["username"].focus();
+        return false;
+    }else if (password== "") {
         alert("password must be filled out");
         document.forms["regform"]["password"].focus();
         return false;
@@ -13,9 +34,9 @@ function regValidate() {
         alert("Email must be filled out");
         document.forms["regform"]["email"].focus();
         return false;
-    }else if (dropdown== "") {
+    }else if (accttype== "") {
         alert("Account Type must be filled out");
-        document.forms["regform"]["dropdown"].focus();
+        document.forms["regform"]["accttype"].focus();
         return false;
     }    
     else if (rpassword == "") {
@@ -29,12 +50,12 @@ function regValidate() {
     }
 }
 function loginValidate(){
-	var email = document.forms["loginform"]["email"].value;
+	var username = document.forms["loginform"]["username"].value;
 	var password = document.forms["loginform"]["password"].value;
 	
-	if (email == "") {
+	if (username == "") {
         alert("username must be filled out");
-        document.forms["loginform"]["email"].focus();
+        document.forms["loginform"]["username"].focus();
         return false;
     }else if (password== "") {
         alert("password must be filled out");
