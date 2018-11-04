@@ -8,10 +8,20 @@
 <script type="text/javascript" src="script.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Login Page</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Parking Management Service</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+      </div>
+    </nav>
 	
-	<h1>Parking Management Service</h1>
 	<form name="loginform" action="LoginController" method="post" onsubmit="return loginValidate()" >
 	<br>
 	${message}<br>

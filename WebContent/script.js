@@ -1,3 +1,19 @@
+function validateReserve(){
+    var lotId = document.forms["reservationForm"]["lotId"].value;
+    var spotId = document.forms["reservationForm"]["spotId"].value;
+    
+    if (lotId == "") {
+        alert("lotId must be filled out");
+        document.forms["reservationForm"]["lotId"].focus();
+        return false;
+    }
+    if (spotId== "") {
+        alert("spotId must be filled out");
+        document.forms["reservationForm"]["spotId"].focus();
+        return false;
+    }
+}
+
 function regValidate() {
 
 	var password = document.forms["regform"]["password"].value;

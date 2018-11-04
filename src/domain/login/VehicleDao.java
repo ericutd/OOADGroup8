@@ -43,7 +43,7 @@ public class VehicleDao {
 		int status = 0;
 		try{
 			conn = db.getConnection();
-			ps =conn.prepareStatement("insert into vehicle values(?,?,?,?,?,?)");
+			ps =conn.prepareStatement("insert into vehicle(ownerId,licenseNum,make,model,year,color) values(?,?,?,?,?,?)");
 			ps.setInt(1, userId);
 			ps.setString(2, v.getLicenseNum());
 			ps.setString(3, v.getMake());
