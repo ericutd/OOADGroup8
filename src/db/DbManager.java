@@ -2,6 +2,9 @@ package db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  * 
  * @author mehra
@@ -9,6 +12,19 @@ import java.sql.DriverManager;
  * database. Data comes from MyDB interface.
  */
 public class DbManager implements MyDB{
+	
+	private static DbManager dbManager;
+	
+	private DbManager() {
+		
+	}
+	
+	public static DbManager getInstance() {
+		if(dbManager == null) {
+			dbManager = new DbManager();
+		}
+		return dbManager;
+	}
 
 	public Connection getConnection(){
 		try {
@@ -19,5 +35,13 @@ public class DbManager implements MyDB{
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public ResultSet execute(String sql) throws SQLException {
+		Connection connection = getConnection();
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		connection.close();
+		return rs;
 	}
 }

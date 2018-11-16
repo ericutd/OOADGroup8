@@ -1,17 +1,14 @@
-<%@ page import="java.util.*" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Welcome Page</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Manage Parking</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
-   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
       <div class="container">
         <a class="navbar-brand" href="#">Parking Management Service</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,26 +48,38 @@
         </div>
       </div>
     </nav>
-
-	<%  ArrayList<String> vDetails = new ArrayList<>();
-		vDetails=(ArrayList)request.getAttribute("vehicleDetails"); %>
-	<%  ArrayList<String> licnum = new ArrayList<>();
-		licnum=(ArrayList)request.getAttribute("licenseNum"); %>
-	<div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <h2 class="mt-5">${message} !!</h2>
-         
-          <p class="lead"> Registered Vehicles:</p>
-           <% for(int i=0;i<vDetails.size();i++){%>
-	          <ol class="list-unstyled">
-	            <li><%=vDetails.get(i)%></li>
-	            <li>License Number: <%=licnum.get(i)%></li>
-	          </ol>
-          <%} %>
-        </div>
-      </div>
-    </div>
-
+	<br>
+	<h4>Manage Parking</h4>
+	<button type="button" onclick='document.getElementById("lots").style.visibility = "visible"'
+	>Add parking lots</button>
+	<div id="lots" style="visibility: hidden">
+		<form  name="insertlotform" action="ParkingLotController" method="post">
+			No of Lots: <input type="text" name="lot" id="lot"> 
+			<button type="submit" name="submit" >Add</button>
+		</form>
+	</div> <br>
+	<button type="button" onclick='document.getElementById("spots").style.visibility = "visible"'>Add parking spots</button>
+	<div id="spots" style="visibility: hidden">
+		<form name="addSpots" action="AdminController" method="post">
+			Lot Id: <select name="id">
+				<c:forEach items="${listId}" var="lotId">
+					<option>${lotId}</option>
+				</c:forEach>
+			</select> No. of Spots: <select name="number">
+				<option>1</option>
+				<option>5</option>
+				<option>10</option>
+				<option>50</option>
+				<option>100</option>
+			</select> Color Permit: <select name="permit">
+				<option>Green</option>
+				<option>Gold</option>
+				<option>Orange</option>
+				<option>Purple</option>
+				<option>Vistor</option>
+			</select>
+			<button type="submit" onclick="Add()">Add</button>
+		</form>
+	</div>
 </body>
 </html>
