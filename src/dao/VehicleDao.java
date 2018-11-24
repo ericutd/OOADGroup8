@@ -27,7 +27,7 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 		ArrayList<Vehicle> vi= new ArrayList<>();
 		try{
 			conn = DbManager.getInstance().getConnection();
-			ps =conn.prepareStatement("select make,model,licenseNum from vehicle where ownerId=? ");
+			ps =conn.prepareStatement("select make,model,licenseNum from vehicle where ownerId=?");
 			ps.setInt(1, userid);
 
 			ResultSet rs = ps.executeQuery();
