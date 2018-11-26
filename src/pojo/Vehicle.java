@@ -2,27 +2,35 @@ package pojo;
 
 public class Vehicle {
 	
-	private long ownerId, permitId;
+	private int ownerId, permitId;
 	
-	private String licenseNum, model, year, color;
-	
+	private String licenseNum, model, year, color, make;
+
 	public Vehicle() {
 		
 	}
 	
-	public long getOwnerId() {
+	public String getMake() {
+		return make;
+	}
+
+	public void setMake(String make) {
+		this.make = make;
+	}
+	
+	public int getOwnerId() {
 		return ownerId;
 	}
 
-	public void setOwnerId(long ownerId) {
+	public void setOwnerId(int ownerId) {
 		this.ownerId = ownerId;
 	}
 
-	public long getPermitId() {
+	public int getPermitId() {
 		return permitId;
 	}
 
-	public void setPermitId(long permitId) {
+	public void setPermitId(int permitId) {
 		this.permitId = permitId;
 	}
 
