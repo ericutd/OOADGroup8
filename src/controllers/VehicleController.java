@@ -16,6 +16,8 @@ import com.google.gson.Gson;
 
 import dao.AdminDao;
 import dao.VehicleDao;
+import others.User;
+import others.UserDaoImpl;
 import others.Vehicle;
 
 /**
@@ -37,22 +39,22 @@ public class VehicleController extends HttpServlet {
 		System.out.println(request.getParameter("msg"));
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		//PrintWriter out= response.getWriter();
-		//out.print(v);
-		//out.flush();
-		//out.close();
-		response.getWriter().write(new Gson().toJson(v));
+		PrintWriter out= response.getWriter();
+		out.print(v);
+		out.flush();
+		out.close();
+		//response.getWriter().write(new Gson().toJson(v));
 		//response.sendRedirect("manageaccount.jsp");
 	}
     
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String submitType = request.getParameter("submit");
+		HttpSession session= request.getSession();
+		int userid = (int)session.getAttribute("userId");
 		
 		if(submitType.equals("UpdateVehicleDetails")){
 			VehicleDao vehicleDao = new VehicleDao();
-			HttpSession session= request.getSession();
-			int userid = (int)session.getAttribute("userId");
 			String licnum = request.getParameter("licnum");
 			String make = request.getParameter("make");
 			String model = request.getParameter("model");
@@ -69,10 +71,11 @@ public class VehicleController extends HttpServlet {
 			vehicleDao.updateVehicleDetails(v);
 			response.sendRedirect("manageaccount.jsp");
 		}else if(submitType.equals("Delete")) {
+			
 			//String licNum = request.getParameter("licnum");
-			String licNum ="ayfgajfg";
+			//String licNum ="ayfgajfg";
 			Vehicle v= new Vehicle();
-			v.setLicenseNum(licNum);
+			v.setOwnerid(userid);
 			VehicleDao vDao= new VehicleDao();
 			try {
 				vDao.delete(v);
@@ -82,7 +85,19 @@ public class VehicleController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+		}else if(submitType.equals("UpdateUserDetails")) {
+			UserDaoImpl userDao = new UserDaoImpl();
+			String pass = request.getParameter("password");
+			String email = request.getParameter("email");
+			String name = request.getParameter("name");
+			
+			User u=new User();
+			u.setName(name);
+			u.setEmail(email);
+			u.setPassword(pass);
+			u.setUserId(userid);
+			userDao.updateUserDetails(u);
+			response.sendRedirect("manageaccount.jsp");
 		}
 	
 
