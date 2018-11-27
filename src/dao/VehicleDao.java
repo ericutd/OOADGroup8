@@ -113,13 +113,38 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 	}
 
 	@Override
-	public Vehicle delete(Vehicle obj) {
+	public Vehicle delete(Vehicle obj) throws SQLException {
+        String sql = "DELETE FROM vehicle WHERE licenseNum = ?";
+		conn = DbManager.getInstance().getConnection();
+		ps =conn.prepareStatement(sql);
+		ps.setString(1, obj.getLicenseNum());
+		ps.executeUpdate();
 		return null;
 	}
 
 	@Override
 	public Vehicle findById(long id) {
-		return null;
+		Vehicle v = new Vehicle();
+
+		try{
+			conn = DbManager.getInstance().getConnection();
+			ps =conn.prepareStatement("select make,model,licenseNum from vehicle where ownerId=? ");
+			ps.setLong(1, id);
+
+			ResultSet rs = ps.executeQuery();
+
+				while(rs.next()){
+					v.setMake(rs.getString(1));
+					v.setModel(rs.getString(2));
+					v.setLicenseNum(rs.getString(3));
+				}
+				
+			conn.close();
+			
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return v;
 	}
 
 	@Override
