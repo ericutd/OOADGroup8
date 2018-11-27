@@ -15,7 +15,7 @@ import dao.UserDao;
 import dao.VehicleDao;
 import others.User;
 import others.UserDaoImpl;
-import others.Vehicle;
+import pojo.Vehicle;
 
 /**
  * Servlet implementation class Login

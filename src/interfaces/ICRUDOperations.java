@@ -13,9 +13,9 @@ public interface ICRUDOperations<T> {
 	
 	T delete(T obj);
 	
-	T findById(long id);
+	List<T> findById(long id);
 	
-	T findAll();
+	List<T> findAll();
 	
 	T find(List<String> fields);
 	

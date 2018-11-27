@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.VehicleDao;
-import others.Vehicle;
+import pojo.Vehicle;
+
 
 /**
  * Servlet implementation class Login
@@ -34,7 +35,7 @@ public class VehicleController extends HttpServlet {
 		String color = request.getParameter("color");
 		
 		Vehicle v=new Vehicle();
-		v.setOwnerid(userid);
+		v.setOwnerId(userid);
 		v.setLicenseNum(licnum);
 		v.setMake(make);
 		v.setModel(model);
@@ -43,6 +44,13 @@ public class VehicleController extends HttpServlet {
 		vehicleDao.updateVehicleDetails(v);
 		response.sendRedirect("manageaccount.jsp");
 
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session= request.getSession();
+		int userid = (int)session.getAttribute("userId");
+		
 	}
 
 }
