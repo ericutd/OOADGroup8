@@ -50,36 +50,27 @@
     </nav>
 	<br>
 	<h4>Manage Parking</h4>
-	<button type="button" name="addparkinglots" onclick='document.getElementById("lots").style.visibility = "visible"'
-	>Add parking lots</button>
-	<div id="lots" style="visibility: hidden">
-		<form  name="insertlotform" action="ParkingLotController" method="post">
+	Add parking Lots
+	<div id="lots" >
+		<form  name="insertlotform" action="AdminController" method="post">
 			No of Lots: <input type="text" name="lot" id="lot"> 
-			<button type="submit" name="submitlots" >Add</button>
-		</form>
-	</div> <br>
-	<button type="button" onclick='document.getElementById("spots").style.visibility = "visible"'>Add parking spots</button>
-	<div id="spots" style="visibility: hidden">
-		<form name="addSpots" action="AdminController" method="post">
-			Lot Id: <select name="id">
-				<c:forEach items="${listId}" var="lotId">
-					<option>${lotId}</option>
-				</c:forEach>
-			</select> No. of Spots: <select name="number">
+			No. of Spots: <select name="spotnumber">
 				<option>1</option>
 				<option>5</option>
 				<option>10</option>
 				<option>50</option>
 				<option>100</option>
-			</select> Color Permit: <select name="permit">
+			</select> 
+			Color Permit: <select name="permit">
 				<option>Green</option>
 				<option>Gold</option>
 				<option>Orange</option>
 				<option>Purple</option>
 				<option>Vistor</option>
 			</select>
-			<button type="submit" onclick="Add()">Add</button>
+			<button type="submit" name="submitlots" >Add</button>
 		</form>
-	</div>
+	</div> <br>
+	
 </body>
 </html>

@@ -28,7 +28,7 @@ $(document).ready(function(){
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<form name="updateuserform" action="UserController" method="post" >
+<form name="updateuserform" action="VehicleController" method="post" >
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
       <div class="container">
         <a class="navbar-brand" href="#">Parking Management Service</a>
@@ -81,7 +81,7 @@ $(document).ready(function(){
 	Email: <input type="text" name="email" id ="email" >
 	<br>
 	
-	<input type="submit" name="submit" value="Update UserDetails" >	
+	<input type="submit" name="submit" value="UpdateUserDetails" >	
 	</form><br>
 	
 	
