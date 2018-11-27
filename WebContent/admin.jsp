@@ -50,12 +50,12 @@
     </nav>
 	<br>
 	<h4>Manage Parking</h4>
-	<button type="button" onclick='document.getElementById("lots").style.visibility = "visible"'
+	<button type="button" name="addparkinglots" onclick='document.getElementById("lots").style.visibility = "visible"'
 	>Add parking lots</button>
 	<div id="lots" style="visibility: hidden">
 		<form  name="insertlotform" action="ParkingLotController" method="post">
 			No of Lots: <input type="text" name="lot" id="lot"> 
-			<button type="submit" name="submit" >Add</button>
+			<button type="submit" name="submitlots" >Add</button>
 		</form>
 	</div> <br>
 	<button type="button" onclick='document.getElementById("spots").style.visibility = "visible"'>Add parking spots</button>
