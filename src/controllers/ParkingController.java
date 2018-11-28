@@ -20,7 +20,7 @@ import dao.VehicleDao;
 import exceptions.*;
 import others.ParkingLot;
 import others.ParkingSpot;
-import others.Vehicle;
+import pojo.Vehicle;
 
 
 @WebServlet("/SelectionController")

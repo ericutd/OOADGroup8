@@ -15,7 +15,7 @@ import exceptions.ParkingException;
 import others.Color;
 import others.ParkingLot;
 import others.ParkingSpot;
-import others.Vehicle;
+import pojo.Vehicle;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -120,7 +120,7 @@ public class ParkingManager
 	public void park(int userId, String lNum, int lotId, int spotId) throws ParkingException
 	{
 		VehicleDao VD = new VehicleDao();
-		Vehicle v = VD.findById(userId);
+		Vehicle v = VD.findByIdNew(userId);
 		//Should we still go get vehicle info from vehicleDao? I don't need it since I have the licenseNumber....
 		//String lNum = v.getLicenseNum();
 		String lId = String.valueOf(lotId);

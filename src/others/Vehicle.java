@@ -7,7 +7,14 @@ public class Vehicle {
 	private String licenseNum;
 	private String color; 
 	private String year;
+	private int permitId; 
 	
+	public int getPermitId() {
+		return permitId;
+	}
+	public void setPermitId(int permitId) {
+		this.permitId = permitId;
+	}
 	public String getMake() {
 		return make;
 	}

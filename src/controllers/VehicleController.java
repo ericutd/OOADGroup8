@@ -12,13 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.google.gson.Gson;
 
 import dao.AdminDao;
 import dao.VehicleDao;
+
 import others.User;
 import others.UserDaoImpl;
-import others.Vehicle;
+import pojo.Vehicle;
+
 
 /**
  * Servlet implementation class Login
@@ -30,21 +31,7 @@ public class VehicleController extends HttpServlet {
     public VehicleController() {}
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	HttpSession session= request.getSession();
-		int userid = (int)session.getAttribute("userId");
-    	VehicleDao  vDao = new VehicleDao();
-    	Vehicle v= new Vehicle();
-		v= vDao.findById(userid);
-		System.out.println("Inside Get");
-		System.out.println(request.getParameter("msg"));
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		PrintWriter out= response.getWriter();
-		out.print(v);
-		out.flush();
-		out.close();
-		//response.getWriter().write(new Gson().toJson(v));
-		//response.sendRedirect("manageaccount.jsp");
+    	
 	}
     
 	@Override
@@ -53,6 +40,7 @@ public class VehicleController extends HttpServlet {
 		HttpSession session= request.getSession();
 		int userid = (int)session.getAttribute("userId");
 		
+
 		if(submitType.equals("UpdateVehicleDetails")){
 			VehicleDao vehicleDao = new VehicleDao();
 			String licnum = request.getParameter("licnum");
@@ -62,7 +50,7 @@ public class VehicleController extends HttpServlet {
 			String color = request.getParameter("color");
 			
 			Vehicle v=new Vehicle();
-			v.setOwnerid(userid);
+			v.setOwnerId(userid);
 			v.setLicenseNum(licnum);
 			v.setMake(make);
 			v.setModel(model);
@@ -75,7 +63,7 @@ public class VehicleController extends HttpServlet {
 			//String licNum = request.getParameter("licnum");
 			//String licNum ="ayfgajfg";
 			Vehicle v= new Vehicle();
-			v.setOwnerid(userid);
+			v.setOwnerId(userid);
 			VehicleDao vDao= new VehicleDao();
 			try {
 				vDao.delete(v);
@@ -102,5 +90,6 @@ public class VehicleController extends HttpServlet {
 	
 
 	}
-
+	
+	
 }

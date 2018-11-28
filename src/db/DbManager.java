@@ -41,7 +41,6 @@ public class DbManager implements MyDB{
 		Connection connection = getConnection();
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
-		connection.close();
 		return rs;
 	}
 }

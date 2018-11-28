@@ -1,4 +1,4 @@
-package test;
+/*package test;
 import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,9 +13,9 @@ public class AddParkingLotsTest
 	System.setProperty("webdriver.chrome.driver","chromedriver.exe");
 	driver = new ChromeDriver();
 	//Put in starting address.
-	/*NOTE TO GROUP: Make sure the same address
+	NOTE TO GROUP: Make sure the same address
 	 * when you run the program on the server.
-	 */
+	 
 	driver.get("http://localhost:8080/ParkingManagementService/login.jsp");
 	Assert.assertEquals("Login Page", driver.getTitle());
 	}
@@ -62,4 +62,4 @@ public class AddParkingLotsTest
 	public void closePage(){
 	driver.quit();
 	}
-}
+}*/
