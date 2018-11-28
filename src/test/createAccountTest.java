@@ -1,4 +1,4 @@
-package test;
+/*package test;
 import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -91,3 +91,4 @@ public class createAccountTest
 	driver.quit();
 	}
 }
+*/
