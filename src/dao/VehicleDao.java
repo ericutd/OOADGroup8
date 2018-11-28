@@ -113,38 +113,36 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 	}
 
 	@Override
-	public Vehicle delete(Vehicle obj) throws SQLException {
-        String sql = "DELETE FROM vehicle WHERE ownerId = ?";
-		conn = DbManager.getInstance().getConnection();
-		ps =conn.prepareStatement(sql);
-		ps.setInt(1, obj.getOwnerid());
-		ps.executeUpdate();
+	public Vehicle delete(Vehicle obj) {
 		return null;
 	}
 
 	@Override
 	public Vehicle findById(long id) {
-		Vehicle v = new Vehicle();
-
-		try{
-			conn = DbManager.getInstance().getConnection();
-			ps =conn.prepareStatement("select make,model,licenseNum from vehicle where ownerId=? ");
-			ps.setLong(1, id);
-
-			ResultSet rs = ps.executeQuery();
-
-				while(rs.next()){
-					v.setMake(rs.getString(1));
-					v.setModel(rs.getString(2));
-					v.setLicenseNum(rs.getString(3));
-				}
-				
-			conn.close();
+		
+		String sqlStr = "SELECT licenseNum, make, model, year, color FROM vehicle WHERE ownerId=" + String.valueOf(id);
+		try
+		{
+			ResultSet rs = dbManager.execute(sqlStr);
 			
-		}catch(Exception e){
-			System.out.println(e);
+			rs.next();
+			
+			Vehicle v = new Vehicle();
+			v.setLicenseNum(rs.getString(1));
+			v.setMake(rs.getString(2));
+			v.setModel(rs.getString(3));
+			v.setYear(rs.getString(4));
+			v.setColor(rs.getString(5));
+			
+			return v;
+			
 		}
-		return v;
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 	@Override
