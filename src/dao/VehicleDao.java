@@ -114,18 +114,16 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 		return null;
 	}
 
-	@Override
+
 	public Vehicle delete(Vehicle obj) throws SQLException {
         String sql = "DELETE FROM vehicle WHERE ownerId = ?";
 		conn = DbManager.getInstance().getConnection();
 		ps =conn.prepareStatement(sql);
 		ps.setInt(1, obj.getOwnerId());
 		ps.executeUpdate();
-		return null;
-	}
+
 
 	@Override
-
 	public List<Vehicle> findById(long id) {
 		StringBuilder select = new StringBuilder();
 		List<Vehicle> vehicles = new ArrayList<>();
@@ -153,6 +151,31 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 		
 		return vehicles;
 
+	public Vehicle findByIdNew(long id) {
+		
+		String sqlStr = "SELECT licenseNum, make, model, year, color FROM vehicle WHERE ownerId=" + String.valueOf(id);
+		try
+		{
+			ResultSet rs = dbManager.execute(sqlStr);
+			
+			rs.next();
+			
+			Vehicle v = new Vehicle();
+			v.setLicenseNum(rs.getString(1));
+			v.setMake(rs.getString(2));
+			v.setModel(rs.getString(3));
+			v.setYear(rs.getString(4));
+			v.setColor(rs.getString(5));
+			
+			return v;
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 	@Override
