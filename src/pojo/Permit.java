@@ -5,8 +5,8 @@ public class Permit {
 	public static enum PermitColor {
 		VISITOR("Visitor"),
 		GREEN("Green"),
-		GOLD("Gold");
-		ORANGE("Orange");
+		GOLD("Gold"),
+		ORANGE("Orange"),
 		PURPLE("Purple");
 		
 		String color;
