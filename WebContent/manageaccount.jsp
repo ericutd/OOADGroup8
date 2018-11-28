@@ -4,12 +4,31 @@
 <html>
 <head>
 <script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	//alert('Hiii');
+	$.ajax({
+		url: 'VehicleController',
+		type: 'GET',
+		dataType:'json',
+		data: {msg:'Hello'},
+		success: function(data){
+			//$('licnum').html(data);
+			alert('Hello');
+			//alert(typeof(data));
+
+		}
+	});
+	return false;
+});
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ManageAccount</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<form name="updateuserform" action="UserController" method="post" >
+<form name="updateuserform" action="VehicleController" method="post" >
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
       <div class="container">
         <a class="navbar-brand" href="#">Parking Management Service</a>
@@ -62,22 +81,28 @@
 	Email: <input type="text" name="email" id ="email" >
 	<br>
 	
-	<input type="submit" name="submit" value="Update UserDetails" >	
+	<input type="submit" name="submit" value="UpdateUserDetails" >	
 	</form><br>
 	
-<form name="updatevehicelform" action="VehicleController" method="post" >
 	
 	<h6>Manage Vehicles:</h6>
-    
+	<button type="button" name="EditVehicle" onclick='document.getElementById("editVehicle").style.visibility = "visible"'
+	>Edit</button> 
+	<form name="deleteVehicle" action="VehicleController" method="post"><input type="submit" name ="submit" value="Delete" 
+	></form>
+	<div id="editVehicle" style="visibility: hidden">  
+	<form name="updatevehicelform"  action="VehicleController" method="post" >
+	  
     License Number: <input type="text" name="licnum" id="licnum"> <br>
     Make: <input type="text" name="make" id="make"> <br>
     Model: <input type="text" name="model" id="model"> <br>
     Year: <input type="text" name="year" id="year"> <br>
     Color: <input type="text" name="color" id="color"> <br>
 	
-	<input type="submit" name="submit" value="Update VehicleDetails" >
+	<input type="submit" name="submit" value="UpdateVehicleDetails" >
 	
 	</form>
+	</div>
 	
 </body>
 </html>

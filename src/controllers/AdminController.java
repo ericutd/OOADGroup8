@@ -22,26 +22,26 @@ public class AdminController extends HttpServlet {
 
 	public AdminController() {}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("here");
-		AdminDao  psDao = new AdminDao();
-		try {
-			List<Integer> listId = psDao.list();
-			request.setAttribute("listId", listId);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("Admin.jsp");
-			dispatcher.forward(request, response);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new ServletException(e);
-		}
+		
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Admin spot = new Admin();
+		int noOfLots = Integer.parseInt(request.getParameter("lot"));	
 		AdminDao psDao = new AdminDao();
-		int noOfSpots= Integer.parseInt(request.getParameter("number"));
-		spot.setParkingLotId(Integer.parseInt(request.getParameter("id")));
-		String colorClass=request.getParameter("permit");
-		spot.setColorPass(colorClass);
-		psDao.Add(spot, noOfSpots);
-		request.getRequestDispatcher("Admin.jsp").forward(request, response);
+		psDao.insertParkingLot(noOfLots);
+		
+		Admin spot = new Admin();
+		int lotId= psDao.getLotId();
+		
+		while(noOfLots>0) {
+			int noOfSpots= Integer.parseInt(request.getParameter("spotnumber"));
+			String colorClass=request.getParameter("permit");
+			spot.setParkingLotId(lotId);
+			spot.setColorPass(colorClass);
+			psDao.insertParkingSpot(spot, noOfSpots);
+			noOfLots--;
+			lotId--;
+		}
+		
+		request.getRequestDispatcher("admin.jsp").forward(request, response);
 	}
 }
