@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 import db.DbManager;
+import helpers.Builder;
 import interfaces.ICRUDOperations;
-import others.Vehicle;
+import pojo.Vehicle;
+
 
 public class VehicleDao implements ICRUDOperations<Vehicle> {
 	static Connection conn;
@@ -27,7 +29,7 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 		ArrayList<Vehicle> vi= new ArrayList<>();
 		try{
 			conn = DbManager.getInstance().getConnection();
-			ps =conn.prepareStatement("select make,model,licenseNum from vehicle where ownerId=? ");
+			ps =conn.prepareStatement("select make,model,licenseNum from vehicle where ownerId=?");
 			ps.setInt(1, userid);
 
 			ResultSet rs = ps.executeQuery();
@@ -76,7 +78,7 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 			ps.setString(3, v.getModel());
 			ps.setString(4, v.getYear());
 			ps.setString(5, v.getColor());
-			ps.setInt(6, v.getOwnerid());
+			ps.setInt(6, v.getOwnerId());
 			ps.executeUpdate();
 			conn.close();
 		}catch(Exception e){
@@ -123,32 +125,38 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 	}
 
 	@Override
-	public Vehicle findById(long id) {
-		Vehicle v = new Vehicle();
 
-		try{
-			conn = DbManager.getInstance().getConnection();
-			ps =conn.prepareStatement("select make,model,licenseNum from vehicle where ownerId=? ");
-			ps.setLong(1, id);
-
-			ResultSet rs = ps.executeQuery();
-
-				while(rs.next()){
-					v.setMake(rs.getString(1));
-					v.setModel(rs.getString(2));
-					v.setLicenseNum(rs.getString(3));
-				}
-				
-			conn.close();
-			
-		}catch(Exception e){
-			System.out.println(e);
+	public List<Vehicle> findById(long id) {
+		StringBuilder select = new StringBuilder();
+		List<Vehicle> vehicles = new ArrayList<>();
+		select.append("select * from vehicle where ownerId = " + id  + ";");
+		try {
+			System.out.println(select.toString());
+			ResultSet rs = dbManager.execute(select.toString());
+			while(rs.next()) {
+                Vehicle vehicle = Builder.of(Vehicle::new)
+                		.with(Vehicle::setOwnerId, rs.getInt(1))
+                		.with(Vehicle::setPermitId, rs.getInt(2))
+                		.with(Vehicle::setLicenseNum, rs.getString(3))
+                		.with(Vehicle::setMake, rs.getString(4))
+                		.with(Vehicle::setModel, rs.getString(5))
+                		.with(Vehicle::setYear, rs.getString(6))
+                		.with(Vehicle::setColor, rs.getString(7))
+                		.build();
+                vehicles.add(vehicle);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Internal Error");
+			e.printStackTrace();
 		}
-		return v;
+		
+		return vehicles;
+
 	}
 
 	@Override
-	public Vehicle findAll() {
+	public List<Vehicle> findAll() {
 		return null;
 	}
 

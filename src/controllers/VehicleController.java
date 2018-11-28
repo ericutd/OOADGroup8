@@ -16,9 +16,11 @@ import com.google.gson.Gson;
 
 import dao.AdminDao;
 import dao.VehicleDao;
+
 import others.User;
 import others.UserDaoImpl;
 import others.Vehicle;
+
 
 /**
  * Servlet implementation class Login
@@ -53,6 +55,7 @@ public class VehicleController extends HttpServlet {
 		HttpSession session= request.getSession();
 		int userid = (int)session.getAttribute("userId");
 		
+
 		if(submitType.equals("UpdateVehicleDetails")){
 			VehicleDao vehicleDao = new VehicleDao();
 			String licnum = request.getParameter("licnum");
@@ -101,6 +104,13 @@ public class VehicleController extends HttpServlet {
 		}
 	
 
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session= request.getSession();
+		int userid = (int)session.getAttribute("userId");
+		
 	}
 
 }
