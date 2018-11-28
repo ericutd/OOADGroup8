@@ -121,8 +121,8 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 		ps =conn.prepareStatement(sql);
 		ps.setInt(1, obj.getOwnerId());
 		ps.executeUpdate();
-
-
+		return null;
+	}
 	@Override
 	public List<Vehicle> findById(long id) {
 		StringBuilder select = new StringBuilder();
@@ -150,6 +150,7 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 		}
 		
 		return vehicles;
+	}
 
 	public Vehicle findByIdNew(long id) {
 		
