@@ -22,16 +22,15 @@ public class PermitController extends HttpServlet {
 	/**
 	 * Default serial version ID
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
 	private PermitService permitService;
 	
-	PermitController() {
-		this.permitService = new PermitService();
-	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Test");
+		this.permitService = new PermitService();
 		this.permitService.addPermit(request, response);
 	}
 	

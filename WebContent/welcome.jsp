@@ -75,7 +75,6 @@ table, th, td {
 		if(user != null) {
 			int userId = Integer.parseInt(user);
 			vehicleList = service.getVehicles(userId);
-			System.out.println(vehicleList);
 		}
 		request.setAttribute("vehicleList", vehicleList);
 	%>
