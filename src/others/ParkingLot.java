@@ -19,12 +19,9 @@ public class ParkingLot
 	DbManager db = DbManager.getInstance(); //DbManager object to initiate connection to database
 	
 	
-	public ParkingLot(){}
 	
-	public ParkingLot(int lId) throws SQLException, ParkingException
-	{
-		lotId = lId;
-		
+	public ParkingLot() throws SQLException, ParkingException
+	{	
 		try
 		{
 			String sqlStr = "SELECT parkingSpotId, currentVehicle, occupied, colorClass FROM parkingSpot WHERE parkingLotId=" + String.valueOf(lotId);
@@ -34,9 +31,17 @@ public class ParkingLot
 			{
 				spots = new ArrayList<>();
 				
+				
+				
 				while(rs.next())
 				{
-					spots.add(new ParkingSpot(rs.getInt(1), rs.getString(2), rs.getBoolean(3), rs.getString(4)));
+					ParkingSpot ps = new ParkingSpot();
+					ps.setSpotId(rs.getInt(1));
+					ps.setCurrentVehicle(rs.getString(2));
+					ps.setOccupied(rs.getBoolean(3));
+					ps.setColor(rs.getString(4));
+					
+					spots.add(ps);
 				}
 			}
 		}
@@ -44,6 +49,11 @@ public class ParkingLot
 		{
 			throw ex;
 		}
+	}
+	
+	public void setParkingLotId(int lId)
+	{
+		this.lotId = lId;
 	}
 	
 	public int getParkingLotId()
@@ -54,5 +64,18 @@ public class ParkingLot
 	public ParkingSpot[] getSpots()
 	{
 		return spots.toArray(new ParkingSpot[spots.size()]);
+	}
+	
+	public ParkingSpot getSpotById(int spotId)
+	{
+		for(int i = 0; i < spots.size(); i++)
+		{
+			if(spots.get(i).getSpotId() == spotId)
+			{
+				return spots.get(i);
+			}
+		}
+		
+		return null;
 	}
 }

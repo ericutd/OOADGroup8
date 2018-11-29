@@ -20,21 +20,34 @@ public class ParkingSpot //DOES NOT access the database - will just be given the
 	
 	public ParkingSpot(){}
 	
-	public ParkingSpot(int sId, String cV, boolean oc, String c) throws ParkingException
+	
+	public void setSpotId(int sId)
 	{
 		this.spotId = sId;
+	}
+	
+	public void setCurrentVehicle(String cV)
+	{
 		this.currentVehicle = cV;
-		this.occupied = oc;
-		
+	}
+	
+	public void setOccupied(boolean o)
+	{
+		this.occupied = o;
+	}
+	
+	public void setColor(String c) throws ParkingException
+	{
 		try
 		{
-			this.colorClass = Color.valueOf(c);	
+			this.colorClass = Color.valueOf(c);
 		}
 		catch(Exception ex)
 		{
-			throw new ParkingException("Invalid colorClass on spot " + spotId);
+			throw new ParkingException("Invalid spot color"); 
 		}
 	}
+	
 	
 	public int getSpotId()
 	{
