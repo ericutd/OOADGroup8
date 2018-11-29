@@ -12,7 +12,7 @@ import java.util.Map;
 import db.DbManager;
 import helpers.Builder;
 import interfaces.ICRUDOperations;
-import pojo.Vehicle;
+import others.Vehicle;
 
 
 public class VehicleDao implements ICRUDOperations<Vehicle> {
