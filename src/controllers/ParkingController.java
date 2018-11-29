@@ -13,14 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-
 import dao.ParkingManager;
 import dao.VehicleDao;
-import exceptions.*;
 import others.ParkingLot;
 import others.ParkingSpot;
-import pojo.Vehicle;
+import others.Vehicle;
 
 
 @WebServlet("/SelectionController")
