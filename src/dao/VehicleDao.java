@@ -78,7 +78,7 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 			ps.setString(3, v.getModel());
 			ps.setString(4, v.getYear());
 			ps.setString(5, v.getColor());
-			ps.setInt(6, v.getOwnerId());
+			ps.setInt(6, v.getOwnerid());
 			ps.executeUpdate();
 			conn.close();
 		}catch(Exception e){
