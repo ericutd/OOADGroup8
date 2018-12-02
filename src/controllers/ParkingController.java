@@ -17,7 +17,7 @@ import dao.ParkingManager;
 import dao.VehicleDao;
 import others.ParkingLot;
 import others.ParkingSpot;
-import others.Vehicle;
+import pojo.Vehicle;
 
 
 @WebServlet("/SelectionController")
@@ -28,8 +28,6 @@ public class ParkingController extends HttpServlet
 	public ParkingController(){}
 	
 	
-	//will the user ever view spots without parking?
-	//ditch the cases idea for view/park and put it all into two cases - just do one thing after the other? (view lots, pick lot, view spots, pick spot, park)
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
@@ -69,6 +67,7 @@ public class ParkingController extends HttpServlet
 				{
 					for(int j = 0; j < selectedLot.length; j++)
 					{
+						//create pojo for parking --> makes sending info to siva easier
 						request.setAttribute("message", selectedLot[j].getSpotId() + "\t");
 						request.getRequestDispatcher("select.jsp").forward(request, response);
 						request.setAttribute("message", selectedLot[j].getColor() + "\t");
@@ -98,7 +97,8 @@ public class ParkingController extends HttpServlet
 					
 					
 					String lNum = request.getParameter("LicenseNum");
-					PM.park(userId, lNum, lotId, spotId);
+					Vehicle v = vehicles[0];
+					PM.park(v, lotId, spotId);
 					
 				}
 				else
@@ -111,7 +111,10 @@ public class ParkingController extends HttpServlet
 			}
 			else if(action.equals("unpark"))
 			{	
-				PM.unPark(userId);
+				lotId = Integer.parseInt(request.getParameter("parkingLotId"));
+				spotId = Integer.parseInt(request.getParameter("parkingSpotId"));
+				
+				PM.unPark(userId, lotId, spotId);
 					
 				request.setAttribute("message", " Success! You have freed your spot!\n"); 
 				request.getRequestDispatcher("selection.jsp").forward(request, response);
