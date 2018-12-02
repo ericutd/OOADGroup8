@@ -43,4 +43,10 @@ public class DbManager implements MyDB{
 		ResultSet rs = ps.executeQuery();
 		return rs;
 	}
+	
+	public void executeUpdate(String sql) throws SQLException {
+		Connection connection = getConnection();
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ps.executeUpdate();
+	}
 }

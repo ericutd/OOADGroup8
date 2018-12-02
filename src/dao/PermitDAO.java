@@ -20,19 +20,20 @@ public class PermitDAO implements ICRUDOperations<Permit> {
 	public Permit insert(Permit permit) {
 		// TODO Auto-generated method stub
 		StringBuilder insertSql = new StringBuilder();
-		insertSql.append("INSERT INTO PERMIT (ownerId,price, colorClass) VALUES (");
+		insertSql.append("INSERT INTO PERMIT (ownerId,price, colorClass, expirationDate) VALUES (");
 		
 		insertSql.append(permit.getOwnerId() + ",");
 		insertSql.append(permit.getPrice() + ",");
-		insertSql.append(permit.getPermitColor().getColor() + ",");
+		insertSql.append("\"" + permit.getPermitColor().name() + "\""+ ",");
+		insertSql.append("\"" + permit.getExpDate() + "\"");
 		
-		insertSql.setLength(insertSql.length()-1);
+//		insertSql.setLength(insertSql.length()-1);
 		insertSql.append(")");
 		
 		// executing phase
 		try {
 			System.out.println(insertSql.toString());
-			dbManager.execute(insertSql.toString());
+			dbManager.executeUpdate(insertSql.toString());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error in inserting" +  permit);

@@ -25,6 +25,17 @@ public class Permit {
 	
 	private PermitColor permitColor;
 	
+	private String expDate;
+	
+	public String getExpDate() {
+		return expDate;
+	}
+
+	public void setExpDate(String expDate){
+		
+		this.expDate = expDate;
+	}
+
 	public int getPermitId() {
 		return permitId;
 	}
