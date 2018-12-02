@@ -3,10 +3,12 @@ package dao;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.sql.ResultSet;
 
 import db.DbManager;
 import interfaces.ICRUDOperations;
 import pojo.Permit;
+import pojo.Permit.PermitColor;
 
 public class PermitDAO implements ICRUDOperations<Permit> {
 	
@@ -62,6 +64,25 @@ public class PermitDAO implements ICRUDOperations<Permit> {
 	@Override
 	public List<Permit> findById(long id) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public Permit findByIdNew(int id) throws SQLException
+	{
+		String sqlStr = "SELECT ownerId, colorClass FROM permit WHERE permitId=" + String.valueOf(id);
+		
+		ResultSet rs = dbManager.execute(sqlStr);
+		
+		if(rs.next())
+		{
+			Permit p = new Permit();
+			p.setOwnerId(rs.getInt(1));
+			p.setPermitId(id);
+			Permit.PermitColor pColor = PermitColor.valueOf(rs.getString(2));
+			p.setPermitColor(pColor);
+			return p;
+		}
+		
 		return null;
 	}
 

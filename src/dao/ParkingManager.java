@@ -13,20 +13,30 @@ import exceptions.ParkingException;
 import others.Color;
 import others.ParkingLot;
 import others.ParkingSpot;
-import others.Vehicle;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import pojo.Permit;
+import pojo.Vehicle;
+import dao.PermitDAO;
 
 public class ParkingManager 
 {
 	
 	DbManager db = DbManager.getInstance(); //DbManager object query/update
 	private ArrayList<ParkingLot> lots; 
+	VehicleDao VD;
+	PermitDAO PD;
 	
 	
 	public ParkingManager() throws ParkingException, SQLException
+	{
+		loadParkingLots();
+		VD = new VehicleDao();
+		PD = new PermitDAO();
+	}
+	
+
+	private void loadParkingLots() throws ParkingException, SQLException
 	{
 		try
 		{
@@ -55,13 +65,6 @@ public class ParkingManager
 		}	
 	}
 	
-	/* Method to list the available parking lots
-	 * @param: none
-	 * @return: an integer array containing all of the parkingLotId's that are available
-	 * throws: ParkingLot Exception to alert user if there are no lots, or an SQL exception if there is an underlying database related issue
-	 */
-	
-	//change this up to just return the lot arrayList
 	public ParkingLot[] getParkingLots()
 	{
 		return lots.toArray(new ParkingLot[lots.size()]);
@@ -100,30 +103,6 @@ public class ParkingManager
 		return null;
 	}
 	
-	
-	private int findSpotByUserId(int uId, ParkingSpot s)
-	{
-		VehicleDao VD = new VehicleDao();
-		Vehicle v = VD.findByIdNew(uId);
-		String lNum = v.getLicenseNum();
-		ParkingLot pLots[] = this.getParkingLots();
-		
-		for(int i = 0; i < pLots.length; i++)
-		{
-			ParkingSpot curLot[] = pLots[i].getSpots();
-			
-			for(int j = 0; j < curLot.length; j++)
-			{
-				if(curLot[j].getCurVehicle().equals(lNum))
-				{
-					s = curLot[j];
-					return i;
-				}
-			}
-		}
-		
-		return -1;
-	}
 	
 	private boolean checkIfValidParking(Permit p, ParkingSpot ps)
 	{
@@ -179,50 +158,34 @@ public class ParkingManager
 		}
 	}
 	
-	public void park(int userId, String lNum, int lotId, int spotId) throws ParkingException
-	{		
-		String sqlStr = "SELECT colorClass FROM permit WHERE ownerId=" + String.valueOf(userId);
-	
-		try
+	public void park(Vehicle v, int lotId, int spotId) throws ParkingException, SQLException
+	{	
+		int permitId = v.getPermitId();
+		
+		Permit P = this.PD.findByIdNew(permitId);
+		
+		if(P == null)
 		{
-			ResultSet rs = db.execute(sqlStr);
-			
-			if(!rs.next())
-			{
-				throw new ParkingException("You must purchase a permit to park!");
-			}
-			else
-			{
-				Permit P = new Permit();
-				P.setOwnerId(userId);
-				Permit.PermitColor pColor = Permit.PermitColor.valueOf(rs.getString(1));
-				P.setPermitColor(pColor);
-				
-				ParkingLot lot = this.findLotById(lotId);
-				ParkingSpot spot = lot.getSpotById(spotId);
-				 
-				if(!checkIfValidParking(P, spot))
-				{
-					throw new ParkingException("You do not have an adequate permit for this spot");
-				}
-				
-				if(spot.getOccupied())
-				{
-					throw new ParkingException("That spot is occupied!");
-				}
-				
-				spot.setOccupied(true);
-				spot.setCurrentVehicle(lNum);
-				this.editSpot(spot, lotId);
-				
-			}
+			throw new ParkingException("You do not have a permit!");
 		}
-		catch(Exception ex)
+		
+		ParkingLot lot = this.findLotById(lotId);
+		ParkingSpot spot = lot.getSpotById(spotId);
+		 
+		if(!checkIfValidParking(P, spot))
 		{
-			throw new ParkingException("Parking error");
+			throw new ParkingException("You do not have an adequate permit for this spot");
+		}
+		
+		if(spot.getOccupied())
+		{
+			throw new ParkingException("That spot is occupied!");
 		}
 		
 		
+		spot.setOccupied(true);
+		spot.setCurrentVehicle(v);
+		this.editSpot(spot, lotId);
 	}
 	
 	/* Method to free the spot a user is leaving
@@ -230,25 +193,28 @@ public class ParkingManager
 	 * @return: none
 	 * throws ParkingException to indicate errors in attempting to free a spot, or SQL exception in the event of an underlying database error
 	 */
-	public void unPark(int uId) throws ParkingException, SQLException
+	public void unPark(int userId, int lotId, int spotId) throws ParkingException, SQLException
 	{	
-		ParkingSpot spot = new ParkingSpot();
-		int lId = this.findSpotByUserId(uId, spot);
+		ParkingLot lot = this.findLotById(lotId);
+		ParkingSpot spot = lot.getSpotById(spotId);
+		Vehicle currentVehicle = spot.getCurVehicle();
 		
-		if(lId == -1)
+		if(currentVehicle.getOwnerid() != userId)
 		{
-			throw new ParkingException("You have not parked anywhere!");
+			throw new ParkingException("You are not parked in this spot!");
 		}
+		
 		
 		spot.setCurrentVehicle(null);
 		spot.setOccupied(false);
-		editSpot(spot, lId);
+		editSpot(spot, lotId);
 	}
 	
 	
 	private void editSpot(ParkingSpot s, int lotId) throws SQLException
 	{
-		String sqlStr = "UPDATE parkingSpot SET currentVehicle=" + s.getCurVehicle() + ", occupied=true WHERE parkingLotId=" + String.valueOf(lotId) + ", AND parkingSpotId=" + s.getSpotId();
+		String lNum = s.getCurVehicle().getLicenseNum();
+		String sqlStr = "UPDATE parkingSpot SET currentVehicle=" + lNum + ", occupied=true WHERE parkingLotId=" + String.valueOf(lotId) + ", AND parkingSpotId=" + s.getSpotId();
 		db.update(sqlStr);
 	}
 	
