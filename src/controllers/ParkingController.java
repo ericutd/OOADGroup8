@@ -15,8 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dao.ParkingManager;
 import dao.VehicleDao;
-import others.ParkingLot;
-import others.ParkingSpot;
+import pojo.ParkingLot;
 import pojo.Vehicle;
 
 
@@ -42,21 +41,10 @@ public class ParkingController extends HttpServlet
 			ParkingManager PM = new ParkingManager();
 			
 			if(action.equals("viewSpots"))
-			{
-				ParkingLot[] lots = PM.getParkingLots();
-				
-				request.setAttribute("message", "LotId:\n");
-				request.getRequestDispatcher("select.jsp").forward(request, response);
-				
-				for(int i = 0; i < lots.length; i++)
-				{
-					request.setAttribute("message", lots[i].getParkingLotId() + "\n");
-					request.getRequestDispatcher("select.jsp").forward(request, response);
-				}
-				
+			{	
 				lotId = Integer.parseInt(request.getParameter("parkingLotId"));
 				
-				ParkingSpot[] selectedLot = PM.getLot(lotId, lots);
+				ParkingLot selectedLot = PM.getLot(lotId);
 				
 				if(selectedLot == null)
 				{
@@ -65,17 +53,6 @@ public class ParkingController extends HttpServlet
 				}
 				else
 				{
-					for(int j = 0; j < selectedLot.length; j++)
-					{
-						//create pojo for parking --> makes sending info to siva easier
-						request.setAttribute("message", selectedLot[j].getSpotId() + "\t");
-						request.getRequestDispatcher("select.jsp").forward(request, response);
-						request.setAttribute("message", selectedLot[j].getColor() + "\t");
-						request.getRequestDispatcher("select.jsp").forward(request, response);
-						request.setAttribute("message", selectedLot[j].getOccupied() + "\n");
-						request.getRequestDispatcher("select.jsp").forward(request, response);
-					}
-					
 					spotId = Integer.parseInt(request.getParameter("parkingSpotId"));
 				}
 			}
@@ -84,27 +61,11 @@ public class ParkingController extends HttpServlet
 				
 				VehicleDao VD = new VehicleDao();
 				Vehicle vehicles[] = VD.VehicleDetails(userId);
-				if(vehicles != null)
-				{
-					request.setAttribute("message", "Select a vehicle by entering its license plate number\n");
-					request.getRequestDispatcher("successReserve.jsp").forward(request, response);
+				
+				String lNum = request.getParameter("LicenseNum");
+				Vehicle v = vehicles[0];
+				PM.park(v, lotId, spotId);
 					
-					for(int i = 0; i < vehicles.length; i++)
-					{
-						request.setAttribute("message", (i+1) + ": " + vehicles[i].getLicenseNum());
-						request.getRequestDispatcher("selection.jsp").forward(request, response);
-					}
-					
-					
-					String lNum = request.getParameter("LicenseNum");
-					Vehicle v = vehicles[0];
-					PM.park(v, lotId, spotId);
-					
-				}
-				else
-				{
-					request.setAttribute("message", "You have no registered vehicles!\n");
-				}
 					
 				request.setAttribute("message", " Success! You have occupied spot number " + spotId + "in lot number " + lotId + "."); 
 				request.getRequestDispatcher("successReserve.jsp").forward(request, response);
