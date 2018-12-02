@@ -12,11 +12,8 @@ public class AddParkingLotsTest
 	public void openLoginPage() throws InterruptedException{
 	System.setProperty("webdriver.chrome.driver","chromedriver.exe");
 	driver = new ChromeDriver();
-	//Put in starting address.
-//	NOTE TO GROUP: Make sure the same address
-//	 * when you run the program on the server.
 	 
-	driver.get("http://localhost:8080/OOAD_CourseProject/login.jsp");
+	driver.get("http://localhost:8080/ParkingManagementService/login.jsp");
 	Assert.assertEquals("Login Page", driver.getTitle());
 	}
 
@@ -40,13 +37,15 @@ public class AddParkingLotsTest
 	button.click();
 	Thread.sleep(5000);
 	Assert.assertEquals("Manage Parking", driver.getTitle());
-	
-	button = driver.findElement(By.name("addparkinglots"));
-	button.click();
-	
+		
 	//User information
 	textBox = driver.findElement(By.name("lot"));;
 	textBox.sendKeys("2");
+	WebElement dropdown = driver.findElement(By.name("spotnumber"));;
+	dropdown.sendKeys("5");
+	dropdown = driver.findElement(By.name("permit"));;
+	dropdown.sendKeys("Purple");
+	
 	Thread.sleep(1000);
 	
 	//Click Register
