@@ -11,10 +11,12 @@ import java.sql.ResultSet;
 import db.DbManager;
 import exceptions.ParkingException;
 import others.Color;
-import others.ParkingLot;
-import others.ParkingSpot;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import pojo.ParkingLot;
+import pojo.ParkingSpot;
 import pojo.Permit;
 import pojo.Vehicle;
 import dao.PermitDAO;
@@ -65,23 +67,18 @@ public class ParkingManager
 		}	
 	}
 	
-	public ParkingLot[] getParkingLots()
+	public ParkingLot getLot(int lId) throws ParkingException
 	{
-		return lots.toArray(new ParkingLot[lots.size()]);
-	}
-	
-	public ParkingSpot[] getLot(int lId, ParkingLot[] lotArr) throws ParkingException
-	{
-		for(int i = 0; i < lotArr.length; i++)
+		for(int i = 0; i < this.lots.size(); i++)
 		{
-			if(lotArr[i].getParkingLotId() == lId)
+			if(this.lots.get(i).getParkingLotId() == lId)
 			{
-				if(lotArr[i].getSpots() == null)
+				if(this.lots.get(i).getSpots() == null)
 				{
 					throw new ParkingException("That lot is currently unavailable.");
 				}
 				
-				return lotArr[i].getSpots();
+				return this.lots.get(i);
 			}
 		}
 		
@@ -89,14 +86,12 @@ public class ParkingManager
 	}
 	
 	private ParkingLot findLotById(int lId)
-	{
-		ParkingLot pLots[] = this.getParkingLots();
-		
-		for(int i = 0; i < pLots.length; i++)
+	{	
+		for(int i = 0; i < this.lots.size(); i++)
 		{
-			if(pLots[i].getParkingLotId() == lId)
+			if(this.lots.get(i).getParkingLotId() == lId)
 			{
-				return pLots[i];
+				return this.lots.get(i);
 			}
 		}
 		
