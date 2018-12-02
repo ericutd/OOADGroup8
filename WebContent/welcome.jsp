@@ -28,28 +28,15 @@ table, th, td {
    <%   
 		UserService service1 = new UserService();
 		HttpSession session_user1 = request.getSession();
-		String user1 = String.valueOf(session_user1.getAttribute("userId"));
-		System.out.println(user1);
-		User u= new User();
-		if(user1 != null) {
-			int userId = Integer.parseInt(user1);
-			u = service1.getUser(userId);
-			//System.out.println(vehicleList);
-		}
-		request.setAttribute("userdata", u);
+		int userId = Integer.parseInt(session_user1.getAttribute("userId").toString());
+		request.setAttribute("userdata", service1.getUser(userId));		
 	%>
 
 	<%   
 		VehicleService service = new VehicleService();
-		HttpSession session_user = request.getSession();
-		String user = String.valueOf(session_user.getAttribute("userId"));
-		System.out.println("Userid on home page:"+user);
 		List<Vehicle> vehicleList = new ArrayList<>();
-		if(user != null) {
-			int userId = Integer.parseInt(user);
-			vehicleList = service.getVehicles(userId);
-			System.out.println(vehicleList.get(0).getMake());
-		}
+		vehicleList = service.getVehicles(userId);
+		System.out.println(vehicleList.get(0).getMake());
 		request.setAttribute("vehicleList", vehicleList);
 	%>
 	

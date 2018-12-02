@@ -19,8 +19,9 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<jsp:include page="header.jsp"/>
+
 <form name="updateuserform" action="VehicleController" method="post" >
-	<jsp:include page="header.jsp"/>
 	<br>
 	<h4>Manage Account</h4>
 	
