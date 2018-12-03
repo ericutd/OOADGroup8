@@ -11,11 +11,11 @@ import java.sql.ResultSet;
 import db.DbManager;
 import exceptions.ParkingException;
 import others.Color;
-import others.ParkingLot;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import application.reservation.ParkingLot;
 import pojo.ParkingSpot;
 import pojo.Permit;
 import pojo.Vehicle;

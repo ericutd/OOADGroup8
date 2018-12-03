@@ -5,8 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+	<jsp:include page="header.jsp"/>
 	<form name="vehform" action="VehicleController" method="post" onsubmit="return regValidate()">
 		<h4>Register Vehicle</h4>
 	    
