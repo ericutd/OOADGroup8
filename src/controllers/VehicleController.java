@@ -39,6 +39,7 @@ public class VehicleController extends HttpServlet {
 		String submitType = request.getParameter("submit");
 		HttpSession session= request.getSession();
 		int userid = (int)session.getAttribute("userId");
+		System.out.println("SubmitType: " + submitType);
 		
 
 		if(submitType.equals("UpdateVehicleDetails")){

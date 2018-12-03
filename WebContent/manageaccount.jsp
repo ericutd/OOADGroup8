@@ -19,9 +19,50 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="header.jsp"/>
-
 <form name="updateuserform" action="VehicleController" method="post" >
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Parking Management Service</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="welcome.jsp">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="select.jsp">Select a Spot</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="manageaccount.jsp">Manage Account</a>
+            </li>
+            <%
+            //String acctType= (String)request.getAttribute("acctType");
+            HttpSession session1= request.getSession();
+    		String acctType = (String)session1.getAttribute("acctType");
+            if(acctType.equals("Admin")){
+            %>
+              <li class="nav-item" >
+              <a class="nav-link" href="admin.jsp">Manage Parking</a>
+            </li>
+            <% }else{ %>
+              <li class="nav-item" style="display:none;">
+              <a class="nav-link" href="admin.jsp">Manage Parking</a>
+            </li>
+            <%} %>
+            <li class="nav-item">
+              <a class="nav-link" href="permit.jsp">Add Permit</a> 
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="logout.jsp">Logout</a> 
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 	<br>
 	<h4>Manage Account</h4>
 	
@@ -50,7 +91,7 @@
 	Email: <input type="text" name="email" id ="email" value= "${userdata.email}" >
 	<br>
 	
-	<input type="submit" name="submit" value="UpdateUserDetails" >	
+	<input type="submit" name="submit" value="UpdateUserDetails" id="userEdit">	
 	</form><br>
 	
 	<%   
@@ -81,13 +122,10 @@
 	    Year: <input type="text" name="year" id="year"  value= "${vehicle.year}"> <br>
 	    Color: <input type="text" name="color" id="color"  value= "${vehicle.color}"> <br>
 		
-		<input type="submit" name="submit" value="UpdateVehicleDetails" >
+		<input type="submit" name="submit" value="UpdateVehicleDetails" id="vehicleEdit">
 	</c:forEach>
-	<a class="nav-link" href="registerVehicle.jsp">Register New Vehicle</a>	
 	</form>
 	</div>
-	
-
 	
 </body>
 </html>

@@ -102,7 +102,7 @@ public class UserDaoImpl implements UserDao {
 		int userId =0;
 		try{
 			conn = db.getConnection();
-			ps =conn.prepareStatement("select userId from user where email=?");	
+			ps =conn.prepareStatement( "select userId from user where email=?");	
 			ps.setString(1, email);
 
 			ResultSet rs = ps.executeQuery();

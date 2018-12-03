@@ -1,4 +1,5 @@
-<%@page import="controllers.LoginController"%>
+<%@page import="db.DbManager"%>
+<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,9 +15,7 @@
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
       <div class="container">
         <a class="navbar-brand" href="#">Parking Management Service</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" 
-        data-target="#navbarResponsive" aria-controls="navbarResponsive" 
-        aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         
@@ -30,7 +29,8 @@
 	
 	Email ID: <input type="text" name="email" id="email"><br>
 	Password: <input type="password" name="password" id="password"><br>
-	<input type="submit" name="submit" value="login"><br><a href="register.jsp">Sign Up</a>
+	<input type="submit" name="submit" value="login"><br>
+	<a href="register.jsp">registration</a>
 	
 	</form>
 </body>

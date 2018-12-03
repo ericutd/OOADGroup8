@@ -44,6 +44,7 @@ public class LoginController extends HttpServlet {
 		User c = customerDao.validateUser(login);
 		
 		if(submitType.equals("login") && c!=null && c.getName()!=null){
+			session.setAttribute("userName", c.getName());
 			request.setAttribute("message", "Hello "+c.getName());
 			VehicleDao vehicleDao = new VehicleDao();
 			Vehicle[] v = vehicleDao.VehicleDetails(userid);

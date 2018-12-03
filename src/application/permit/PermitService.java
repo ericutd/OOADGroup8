@@ -21,14 +21,12 @@ public class PermitService {
 		HttpSession session= request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		double price = Double.valueOf(request.getParameter("price"));
-		String date = request.getParameter("exp_date");
 		PermitColor color = PermitColor.valueOf(request.getParameter("color"));
 		
 		Permit permit = Builder.of(Permit::new)
 				.with(Permit::setOwnerId, userId)
 				.with(Permit::setPrice, price)
 				.with(Permit::setPermitColor, color)
-				.with(Permit::setExpDate, date)
 				.build();
 		
 		PermitDAO permitDAO = new PermitDAO();
