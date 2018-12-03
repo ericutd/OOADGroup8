@@ -34,7 +34,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="select.jsp">Select a Spot</a>
+              <a class="nav-link" href="select.jsp">Spot Management</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="manageaccount.jsp">Manage Account</a>

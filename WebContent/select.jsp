@@ -24,7 +24,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="select.jsp">Select a Spot</a>
+              <a class="nav-link" href="select.jsp">Spot Management</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="manageaccount.jsp">Manage Account</a>
@@ -59,8 +59,8 @@
 		<form id="selectReservation" action="SelectionController" method="post" onsubmit="return validateReserve()">
 			Lot ID<input type="text" name="parkingLotId"><br>
 			SPOT ID<input type="text" name="parkingSpotId"><br>
-			<input type="submit" name="reserveSubmit" value="park">
-			<input type="submit" name="reserveSubmit" value="unpark">
+			<input type="submit" name="reserveSubmit" value="park" id="park">
+			<input type="submit" name="reserveSubmit" value="unpark" id="unpark">
 		</form>
 	</div>
 </body>

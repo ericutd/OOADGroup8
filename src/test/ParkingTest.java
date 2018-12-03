@@ -39,7 +39,7 @@ public class ParkingTest {
 			Assert.assertEquals("false", driver.findElement(By.id("occupied2")).getText());
 
 			// Park
-			WebElement button = driver.findElement(By.linkText("Select a Spot"));
+			WebElement button = driver.findElement(By.linkText("Spot Management"));
 			button.click();
 			textBox = driver.findElement(By.name("parkingLotId"));
 			textBox.sendKeys("7");
@@ -47,7 +47,7 @@ public class ParkingTest {
 			textBox = driver.findElement(By.name("parkingSpotId"));
 			textBox.sendKeys("3");
 			Thread.sleep(2000);
-			button = driver.findElement(By.name("reserveSubmit"));
+			button = driver.findElement(By.id("park"));
 			button.click();
 			Thread.sleep(5000);
 			Assert.assertEquals("Success", driver.getTitle());
@@ -74,8 +74,8 @@ public class ParkingTest {
 			Assert.assertEquals("987987", driver.findElement(By.id("currentLicenseNum2")).getText());
 			Assert.assertEquals("Odyssey", driver.findElement(By.id("currentModel2")).getText());
 
-			// Park
-			WebElement button = driver.findElement(By.linkText("Select a Spot"));
+			// Unpark
+			WebElement button = driver.findElement(By.linkText("Spot Management"));
 			button.click();
 			textBox = driver.findElement(By.name("parkingLotId"));
 			textBox.sendKeys("7");
@@ -83,10 +83,11 @@ public class ParkingTest {
 			textBox = driver.findElement(By.name("parkingSpotId"));
 			textBox.sendKeys("3");
 			Thread.sleep(2000);
-			button = driver.findElement(By.name("reserveSubmit"));
+			button = driver.findElement(By.id("unpark"));
 			button.click();
 			Thread.sleep(5000);
-			Assert.assertEquals("Success", driver.getTitle());
+			Assert.assertEquals("Welcome Page", driver.getTitle());
+			Assert.assertEquals("false", driver.findElement(By.id("occupied2")).getText());
 		} catch (InterruptedException e) { 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
