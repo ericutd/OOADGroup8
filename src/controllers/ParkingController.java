@@ -35,7 +35,7 @@ public class ParkingController extends HttpServlet
 		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		String action = request.getParameter("reserveSubmit"); //hidden parameter that is set based on the action desired by user
-		System.out.println("ACTION: " + action);
+
 		int lotId = 0;
 		int spotId = 0;
 	
@@ -65,6 +65,8 @@ public class ParkingController extends HttpServlet
 
 				VehicleDao VD = new VehicleDao();
 				Vehicle vehicles[] = VD.VehicleDetails(userId);
+				lotId = Integer.parseInt(request.getParameter("parkingLotId"));
+				spotId = Integer.parseInt(request.getParameter("parkingSpotId"));
 				
 				String lNum = request.getParameter("LicenseNum");
 				Vehicle v = vehicles[0];
@@ -92,6 +94,7 @@ public class ParkingController extends HttpServlet
 		}
 		catch(Exception ex)
 		{
+			ex.printStackTrace();
 			request.setAttribute("message", " " + ex);
 			request.getRequestDispatcher("select.jsp").forward(request, response);
 		}
