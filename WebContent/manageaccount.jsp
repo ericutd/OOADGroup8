@@ -83,10 +83,11 @@
 		
 		<input type="submit" name="submit" value="UpdateVehicleDetails" >
 	</c:forEach>
+	<a class="nav-link" href="registerVehicle.jsp">Register New Vehicle</a>	
 	</form>
 	</div>
 	
-<a class="nav-link" href="registerVehicle.jsp">Register New Vehicle</a>	
+
 	
 </body>
 </html>

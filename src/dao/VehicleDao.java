@@ -12,7 +12,7 @@ import java.util.Map;
 import db.DbManager;
 import helpers.Builder;
 import interfaces.ICRUDOperations;
-import others.Vehicle;
+import pojo.Vehicle;
 
 
 public class VehicleDao implements ICRUDOperations<Vehicle> {
@@ -78,7 +78,7 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 			ps.setString(3, v.getModel());
 			ps.setString(4, v.getYear());
 			ps.setString(5, v.getColor());
-			ps.setInt(6, v.getOwnerid());
+			ps.setInt(6, v.getOwnerId());
 			ps.executeUpdate();
 			conn.close();
 		}catch(Exception e){

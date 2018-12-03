@@ -18,9 +18,19 @@ public class ParkingSpot //DOES NOT access the database - will just be given the
 	private boolean occupied = false;
 	private Vehicle currentVehicle;
 	private Color colorClass = null;
-	
-	
+	private int lotId;
+
 	public ParkingSpot(){}
+	
+	public int getLotId() {
+		return lotId;
+	}
+
+
+	public void setLotId(int lotId) {
+		this.lotId = lotId;
+	}
+
 	
 	
 	public void setSpotId(int sId)
@@ -61,7 +71,7 @@ public class ParkingSpot //DOES NOT access the database - will just be given the
 		return this.occupied;
 	}
 	
-	public Vehicle getCurVehicle()
+	public Vehicle getCurrentVehicle()
 	{
 		return this.currentVehicle;
 	}

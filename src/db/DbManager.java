@@ -44,7 +44,7 @@ public class DbManager implements MyDB{
 		return rs;
 	}
 	
-	public void update(String sql) throws SQLException{
+	public void executeUpdate(String sql) throws SQLException {
 		Connection connection = getConnection();
 		PreparedStatement ps = connection.prepareStatement(sql);
 		ps.executeUpdate();

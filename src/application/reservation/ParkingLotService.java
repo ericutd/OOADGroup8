@@ -1,26 +1,33 @@
-package pojo;
+package application.reservation;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import java.sql.SQLException;
 import db.DbManager;
 import exceptions.ParkingException;
+import javafx.scene.paint.Color;
+import pojo.ParkingSpot;
+import pojo.Vehicle;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Connection;
 import dao.VehicleDao;
 
 
-public class ParkingLot 
+public class ParkingLotService 
 {
 	private int lotId;
-	private ArrayList<ParkingSpot> spots;
+	private List<ParkingSpot> spots = new ArrayList<>();
 	static Connection conn; //connection to the database
 	static PreparedStatement ps; //prepared statement for issuing sql queries
 	DbManager db = DbManager.getInstance(); //DbManager object to initiate connection to database
 	
 	
 	
-	public ParkingLot() throws SQLException, ParkingException
+	public ParkingLotService() throws SQLException, ParkingException
 	{	
 		loadSpots();
 	}
@@ -29,12 +36,10 @@ public class ParkingLot
 	{
 		try
 		{
-			String sqlStr = "SELECT parkingSpotId, currentVehicle, occupied, colorClass FROM parkingSpot WHERE parkingLotId=" + String.valueOf(lotId);
+			String sqlStr = "SELECT parkingLotId, parkingSpotId, currentVehicle, occupied, colorClass FROM parkingSpot";
 			ResultSet rs = db.execute(sqlStr);
-		
-			if(rs.next())
-			{
-				spots = new ArrayList<>();
+
+			spots = new ArrayList<>();
 				
 				ResultSet rs2;
 				Vehicle v = new Vehicle();
@@ -43,8 +48,9 @@ public class ParkingLot
 				while(rs.next())
 				{
 					ParkingSpot ps = new ParkingSpot();
-					ps.setSpotId(rs.getInt(1));
-					sqlStr = "SELECT ownerId FROM vehicle WHERE licenseNum=" + rs.getString(2);
+					ps.setLotId(rs.getInt(1));
+					ps.setSpotId(rs.getInt(2));
+					sqlStr = "SELECT ownerId FROM vehicle WHERE licenseNum=" + rs.getString(3);
 					rs2 = db.execute(sqlStr);
 					
 					if(rs2.next())
@@ -57,12 +63,11 @@ public class ParkingLot
 					}
 					
 					ps.setCurrentVehicle(v);
-					ps.setOccupied(rs.getBoolean(3));
-					ps.setColor(rs.getString(4));
+					ps.setOccupied(rs.getBoolean(4));
+					ps.setColor(rs.getString(5));
 					
 					spots.add(ps);
 				}
-			}
 		}
 		catch(Exception ex)
 		{
@@ -80,9 +85,13 @@ public class ParkingLot
 		return this.lotId;
 	}
 	
-	public ParkingSpot[] getSpots()
+	public List<ParkingSpot> getSpots()
 	{
-		return spots.toArray(new ParkingSpot[spots.size()]);
+		return spots;
+	}
+	
+	public void setSpots(ArrayList<ParkingSpot> spots) {
+		this.spots = spots;
 	}
 	
 	public ParkingSpot getSpotById(int spotId)

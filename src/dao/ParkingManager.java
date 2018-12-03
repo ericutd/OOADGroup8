@@ -15,7 +15,7 @@ import others.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import pojo.ParkingLot;
+import application.reservation.ParkingLotService;
 import pojo.ParkingSpot;
 import pojo.Permit;
 import pojo.Vehicle;
@@ -25,7 +25,7 @@ public class ParkingManager
 {
 	
 	DbManager db = DbManager.getInstance(); //DbManager object query/update
-	private ArrayList<ParkingLot> lots; 
+	private ArrayList<ParkingLotService> lots; 
 	VehicleDao VD;
 	PermitDAO PD;
 	
@@ -54,7 +54,7 @@ public class ParkingManager
 				
 				while(rs.next())
 				{
-					ParkingLot pl = new ParkingLot();
+					ParkingLotService pl = new ParkingLotService();
 					pl.setParkingLotId(rs.getInt(1));
 					
 					this.lots.add(pl);
@@ -67,7 +67,7 @@ public class ParkingManager
 		}	
 	}
 	
-	public ParkingLot getLot(int lId) throws ParkingException
+	public ParkingLotService getLot(int lId) throws ParkingException
 	{
 		for(int i = 0; i < this.lots.size(); i++)
 		{
@@ -85,7 +85,7 @@ public class ParkingManager
 		return null;
 	}
 	
-	private ParkingLot findLotById(int lId)
+	private ParkingLotService findLotById(int lId)
 	{	
 		for(int i = 0; i < this.lots.size(); i++)
 		{
@@ -164,7 +164,7 @@ public class ParkingManager
 			throw new ParkingException("You do not have a permit!");
 		}
 		
-		ParkingLot lot = this.findLotById(lotId);
+		ParkingLotService lot = this.findLotById(lotId);
 		ParkingSpot spot = lot.getSpotById(spotId);
 		 
 		if(!checkIfValidParking(P, spot))
@@ -190,11 +190,11 @@ public class ParkingManager
 	 */
 	public void unPark(int userId, int lotId, int spotId) throws ParkingException, SQLException
 	{	
-		ParkingLot lot = this.findLotById(lotId);
+		ParkingLotService lot = this.findLotById(lotId);
 		ParkingSpot spot = lot.getSpotById(spotId);
 		Vehicle currentVehicle = spot.getCurVehicle();
 		
-		if(currentVehicle.getOwnerid() != userId)
+		if(currentVehicle.getOwnerId() != userId)
 		{
 			throw new ParkingException("You are not parked in this spot!");
 		}
@@ -210,7 +210,7 @@ public class ParkingManager
 	{
 		String lNum = s.getCurVehicle().getLicenseNum();
 		String sqlStr = "UPDATE parkingSpot SET currentVehicle=" + lNum + ", occupied=true WHERE parkingLotId=" + String.valueOf(lotId) + ", AND parkingSpotId=" + s.getSpotId();
-		db.update(sqlStr);
+		db.executeUpdate(sqlStr);
 	}
 	
 	

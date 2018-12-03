@@ -2,7 +2,9 @@
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@page import="application.vehicle.VehicleService"%>
 <%@ page import="pojo.Vehicle" %>
+<%@ page import="pojo.ParkingSpot" %>
 <%@page import="application.user.UserService"%>
+<%@page import="application.reservation.ParkingLotService"%>
 <%@ page import="others.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>   
@@ -25,28 +27,32 @@ table, th, td {
 <body>
 	
    <jsp:include page="header.jsp"/>
-   <%   
-		UserService service1 = new UserService();
-		HttpSession session_user1 = request.getSession();
-		int userId = Integer.parseInt(session_user1.getAttribute("userId").toString());
-		request.setAttribute("userdata", service1.getUser(userId));		
-	%>
-
-	<%   
-		VehicleService service = new VehicleService();
-		List<Vehicle> vehicleList = new ArrayList<>();
-		vehicleList = service.getVehicles(userId);
-		System.out.println(vehicleList.get(0).getMake());
-		request.setAttribute("vehicleList", vehicleList);
-	%>
+   <%
+   	UserService service1 = new UserService();
+      		VehicleService service = new VehicleService();
+      		ParkingLotService parkingLotService = new ParkingLotService();
+   		HttpSession session_user1 = request.getSession();
+   		String user = String.valueOf(session_user1.getAttribute("userId"));
+   		 
+   		
+   		List<Vehicle> vehicleList = new ArrayList<>();
+   		if(user != null) {
+   	int userId = Integer.parseInt(user);
+   	request.setAttribute("userdata", service1.getUser(userId));		 
+   	vehicleList = service.getVehicles(userId);
+   	request.setAttribute("vehicleList", vehicleList);
+   	List<ParkingSpot> spots = parkingLotService.getSpots();
+   	request.setAttribute("spots", spots);
+   		}
+   %>
 	
 	<div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
-          <h2 class="mt-5"> ${userdata.name}!!</h2>
+          <h2 class="mt-5"> Welcome ${userdata.name}!!</h2>
          
-         <h3>Your Vehicles</h3>
-         <h3>
+         <h3>Your Vehicles</h3> 
+			<h3>
          	<table style="width:100%">
          	  <tr>
          	  	<th>Make</th>
@@ -64,10 +70,46 @@ table, th, td {
 			  	
 			  </c:forEach>
 			</table>
+			<br>
           </h3>
+         
         </div>
       </div>
     </div>
+
+
+	<div>
+		<div class="col-lg-12 text-center">
+			<h3>Spots</h3>
+         <h3>
+         	<table style="width:100%">
+         	  <tr>
+         	  	<th>Lot ID</th>
+         	  	<th>SpotID</th>
+         	  	<th>Occupied</th>
+         	  	<th>License Number</th>
+         	  	<th>Model</th>
+         	  	<th>Color</th>
+         	  </tr>	
+			  <c:forEach items="${spots}" var="spots">
+			  		<tr>
+			  			<td> ${spots.lotId} </td>
+			  			<td> ${spots.spotId} </td> 
+			  			<td> ${spots.occupied} </td> 
+			  			<td> ${spots.currentVehicle.licenseNum} </td>
+			  			<td> ${spots.currentVehicle.model} </td>
+			  			<td> ${spots.color} </td>
+			  		</tr>
+			  	
+			  </c:forEach>
+			</table>
+			<br>
+          </h3>
+			         
+		</div>
+	</div>
+
+
 
 </body>
 </html>
