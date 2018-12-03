@@ -52,7 +52,7 @@ public class ParkingSpot //DOES NOT access the database - will just be given the
 	{
 		try
 		{
-			this.colorClass = Color.valueOf(c);
+			this.colorClass = Color.getColor(c);
 		}
 		catch(Exception ex)
 		{

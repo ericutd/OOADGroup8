@@ -17,7 +17,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="">Home
+              <a class="nav-link" href="welcome.jsp">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -41,6 +41,9 @@
               <a class="nav-link" href="admin.jsp">Manage Parking</a>
             </li>
             <%} %>
+            <li class="nav-item">
+              <a class="nav-link" href="permit.jsp">Add Permit</a> 
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="logout.jsp">Logout</a> 
             </li>

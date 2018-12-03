@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="">Home
+              <a class="nav-link" href="welcome.jsp">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
@@ -44,6 +44,9 @@
             </li>
             <%} %>
             <li class="nav-item">
+              <a class="nav-link" href="permit.jsp">Add Permit</a> 
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="logout.jsp">Logout</a> 
             </li>
           </ul>
@@ -56,7 +59,7 @@
 		<form id="selectReservation" action="SelectionController" method="post" onsubmit="return validateReserve()">
 			Lot ID<input type="text" name="parkingLotId"><br>
 			SPOT ID<input type="text" name="parkingSpotId"><br>
-			<input type="submit" name="reserveSubmit" value="reserve">
+			<input type="submit" name="reserveSubmit" value="park">
 		</form>
 	</div>
 </body>

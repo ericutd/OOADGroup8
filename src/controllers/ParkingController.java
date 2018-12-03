@@ -31,9 +31,11 @@ public class ParkingController extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		System.out.println("HERE!!! HERE!!! HERE!!!");
 		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
-		String action = request.getParameter("action"); //hidden parameter that is set based on the action desired by user
+		String action = request.getParameter("reserveSubmit"); //hidden parameter that is set based on the action desired by user
+		System.out.println("ACTION: " + action);
 		int lotId = 0;
 		int spotId = 0;
 	
@@ -59,7 +61,8 @@ public class ParkingController extends HttpServlet
 			}
 			else if(action.equals("park"))
 			{
-				
+				System.out.println("HERE1!!! HERE2!!! HERE3!!!");
+
 				VehicleDao VD = new VehicleDao();
 				Vehicle vehicles[] = VD.VehicleDetails(userId);
 				
