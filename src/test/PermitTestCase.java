@@ -1,4 +1,4 @@
-/*package test;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -19,7 +19,7 @@ public class PermitTestCase {
 	@Before
 	public void openWikipediaEnglishPage() throws InterruptedException{
 		driver = new ChromeDriver();
-		driver.get("http://localhost:8080/CourseProject/login.jsp");
+		driver.get("http://localhost:8080/OOAD_CourseProject/login.jsp");
 		Assert.assertEquals("Login Page", driver.getTitle());
 	}
 
@@ -65,4 +65,3 @@ public class PermitTestCase {
 	}
 
 }
-*/

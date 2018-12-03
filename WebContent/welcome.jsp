@@ -62,10 +62,10 @@ table, th, td {
          	  </tr>	
 			  <c:forEach items="${vehicleList}" var="vehicle">
 			  		<tr>
-			  			<td> ${vehicle.make} </td> 
-			  			<td> ${vehicle.year} </td> 
-			  			<td> ${vehicle.model} </td>
-			  			<td> ${vehicle.color} </td>
+			  			<td id="vehicleMake"> ${vehicle.make} </td> 
+			  			<td id="vehicleYear"> ${vehicle.year} </td> 
+			  			<td id="vehicleModel"> ${vehicle.model} </td>
+			  			<td id="vehicleColor"> ${vehicle.color} </td>
 			  		</tr>
 			  	
 			  </c:forEach>
@@ -91,14 +91,14 @@ table, th, td {
          	  	<th>Model</th>
          	  	<th>Color</th>
          	  </tr>	
-			  <c:forEach items="${spots}" var="spots">
+			  <c:forEach items="${spots}" var="spots" varStatus="ind">
 			  		<tr>
-			  			<td> ${spots.lotId} </td>
-			  			<td> ${spots.spotId} </td> 
-			  			<td> ${spots.occupied} </td> 
-			  			<td> ${spots.currentVehicle.licenseNum} </td>
-			  			<td> ${spots.currentVehicle.model} </td>
-			  			<td> ${spots.color} </td>
+			  			<td id="lotId${ind.index}"> ${spots.lotId} </td>
+			  			<td id="spotId${ind.index}"> ${spots.spotId} </td> 
+			  			<td id="occupied${ind.index}"> ${spots.occupied} </td> 
+			  			<td id="currentLicenseNum${ind.index}"> ${spots.currentVehicle.licenseNum} </td>
+			  			<td id="currentModel${ind.index}"> ${spots.currentVehicle.model} </td>
+			  			<td id="color${ind.index}"> ${spots.color} </td>
 			  		</tr>
 			  	
 			  </c:forEach>
