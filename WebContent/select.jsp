@@ -1,4 +1,4 @@
-<%@page import="controllers.SelectionController"%>
+<%@page import="controllers.ParkingController"%>
 <%@page import="db.DbManager"%>
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>

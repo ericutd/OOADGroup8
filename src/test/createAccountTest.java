@@ -1,8 +1,6 @@
 package test;
 import org.junit.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class createAccountTest 
@@ -11,9 +9,13 @@ public class createAccountTest
 
 	//Before you run the tests
 	@Before
-	public void openWikipediaEnglishPage() throws InterruptedException{
+	public void openLoginPage() throws InterruptedException{
 	System.setProperty("webdriver.chrome.driver","chromedriver.exe");
 	driver = new ChromeDriver();
+	//Put in starting address.
+	/*NOTE TO GROUP: Make sure the same address
+	 * when you run the program on the server.
+	 */
 	driver.get("http://localhost:8080/OOAD_CourseProject/login.jsp");
 	Assert.assertEquals("Login Page", driver.getTitle());
 	}
@@ -28,7 +30,7 @@ public class createAccountTest
 	
 	//User information
 	WebElement textBox = driver.findElement(By.name("name"));;
-	textBox.sendKeys("tester");
+	textBox.sendKeys("Mike Test");
 	Thread.sleep(1000);
 	textBox = driver.findElement(By.name("password"));;
 	textBox.sendKeys("test");
@@ -37,24 +39,24 @@ public class createAccountTest
 	textBox.sendKeys("test");
 	Thread.sleep(1000);
 	textBox = driver.findElement(By.name("email"));;
-	textBox.sendKeys("t@gmail.com");
+	textBox.sendKeys("mt@yahoo.net");
 	Thread.sleep(1000);
 	
 	//Vehicle Information
 	textBox = driver.findElement(By.name("licnum"));;
-	textBox.sendKeys("123123");
+	textBox.sendKeys("123Q123");
 	Thread.sleep(1000);
 	textBox = driver.findElement(By.name("make"));;
-	textBox.sendKeys("Toyota");
+	textBox.sendKeys("Ford");
 	Thread.sleep(1000);
 	textBox = driver.findElement(By.name("model"));;
-	textBox.sendKeys("Corolla");
+	textBox.sendKeys("Mustang");
 	Thread.sleep(1000);
 	textBox = driver.findElement(By.name("year"));;
 	textBox.sendKeys("2018");
 	Thread.sleep(1000);
 	textBox = driver.findElement(By.name("color"));;
-	textBox.sendKeys("Blue");
+	textBox.sendKeys("Green");
 	Thread.sleep(1000);
 	
 	//Click Register
@@ -70,7 +72,7 @@ public class createAccountTest
 	public void testLogin() throws InterruptedException{
 	//User information
 	WebElement textBox = driver.findElement(By.name("email"));;
-	textBox.sendKeys("t@gmail.com");
+	textBox.sendKeys("mt@yahoo.net");
 	Thread.sleep(1000);
 	textBox = driver.findElement(By.name("password"));;
 	textBox.sendKeys("test");

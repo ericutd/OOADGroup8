@@ -24,15 +24,10 @@ public class PermitController extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private PermitService permitService;
-	
-	PermitController() {
-		this.permitService = new PermitService();
-	}
-	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.permitService.addPermit(request, response);
+		PermitService permitService = new PermitService();
+		permitService.addPermit(request, response);
 	}
 	
 }

@@ -70,6 +70,7 @@ table, th, td {
 		VehicleService service = new VehicleService();
 		HttpSession session_user = request.getSession();
 		String user = String.valueOf(session_user.getAttribute("userId"));
+		
 		System.out.println(user);
 		List<Vehicle> vehicleList = new ArrayList<>();
 		if(user != null) {
@@ -78,6 +79,7 @@ table, th, td {
 			System.out.println(vehicleList);
 		}
 		request.setAttribute("vehicleList", vehicleList);
+		request.setAttribute("message", "Hello "+session_user.getAttribute("userName"));
 	%>
 	
 	<div class="container">
@@ -96,10 +98,10 @@ table, th, td {
          	  </tr>	
 			  <c:forEach items="${vehicleList}" var="vehicle">
 			  		<tr>
-			  			<td> ${vehicle.make} </td> 
-			  			<td> ${vehicle.year} </td> 
-			  			<td> ${vehicle.model} </td>
-			  			<td> ${vehicle.color} </td>
+			  			<td id="vehicleMake"> ${vehicle.make} </td> 
+			  			<td id="vehicleYear"> ${vehicle.year} </td> 
+			  			<td id="vehicleModel"> ${vehicle.model} </td>
+			  			<td id="vehicleColor"> ${vehicle.color} </td>
 			  		</tr>
 			  	
 			  </c:forEach>

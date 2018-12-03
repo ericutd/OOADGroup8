@@ -24,7 +24,7 @@ public class PermitDAO implements ICRUDOperations<Permit> {
 		
 		insertSql.append(permit.getOwnerId() + ",");
 		insertSql.append(permit.getPrice() + ",");
-		insertSql.append(permit.getPermitColor().getColor() + ",");
+		insertSql.append("\"" + permit.getPermitColor().name() + "\"" + ",");
 		
 		insertSql.setLength(insertSql.length()-1);
 		insertSql.append(")");
@@ -60,13 +60,13 @@ public class PermitDAO implements ICRUDOperations<Permit> {
 	}
 
 	@Override
-	public Permit findById(long id) {
+	public List<Permit> findById(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Permit findAll() {
+	public List<Permit> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

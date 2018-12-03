@@ -15,16 +15,16 @@ import java.util.List;
 	static PreparedStatement ps;
 	DbManager db = DbManager.getInstance();
 	
-	public int Add(Admin p,int noOfSpots){
+	public int insertParkingSpot(Admin p,int noOfSpots){
 		int status = 0;
 		
 		while(noOfSpots > 0)
 		{
 			try{
 				conn = db.getConnection();
-				ps = conn.prepareStatement("insert into parkingSpot values(?,?,?,?)");
+				ps = conn.prepareStatement("insert into parkingSpot(parkingLotId,currentVehicle,occupied,colorClass) values(?,null,0,?)");
 				ps.setInt(1, p.getParkingLotId());
-				ps.setString(4, p.getColorPass());
+				ps.setString(2, p.getColorPass());
 				status = ps.executeUpdate();
 			}catch(Exception e){
 				System.out.println(e);
@@ -50,5 +50,39 @@ import java.util.List;
 		    throw ex;
 		}      
  		return lotId;
+	}
+	
+	public int getLotId(){
+		int lotId =0;
+		try{
+			conn = db.getConnection();
+			ps =conn.prepareStatement( "select max(parkingLotId) from parkingLot");	
+			//ps.setString(1, email);
+
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				lotId = Integer.parseInt(rs.getString(1));
+			}
+			conn.close();
+		}catch (SQLException ex) {
+		    ex.printStackTrace();
+		}
+		return lotId;
+	}
+	
+	public int insertParkingLot(int noOfLots) {
+		int status = 0;
+		try{
+			conn = db.getConnection();
+			while(noOfLots>0) {
+				ps =conn.prepareStatement("insert into parkinglot values()");
+				status = ps.executeUpdate();
+				noOfLots--;
+			}		
+			conn.close();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+		return status;
 	}
 }
