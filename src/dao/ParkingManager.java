@@ -193,6 +193,7 @@ public class ParkingManager
 		ParkingLotService lot = this.findLotById(lotId);
 		ParkingSpot spot = lot.getSpotById(spotId);
 		Vehicle currentVehicle = spot.getCurrentVehicle();		
+
 		if(currentVehicle.getOwnerId() != userId)
 		{
 			throw new ParkingException("You are not parked in this spot!");
@@ -209,6 +210,7 @@ public class ParkingManager
 	{
 		String lNum = s.getCurrentVehicle().getLicenseNum();
 		String sqlStr = "UPDATE parkingSpot SET currentVehicle=" + lNum + ", occupied=true WHERE parkingLotId=" + lotId + " AND parkingSpotId=" + s.getSpotId();
+
 		db.executeUpdate(sqlStr);
 	}
 	

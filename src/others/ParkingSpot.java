@@ -4,11 +4,9 @@
  * This class defines a parking spot which contains the information describing a particular parking spot
  */
 
-package pojo;
+package others;
 
 import exceptions.ParkingException;
-import others.Color;
-
 
 //parkingLot is same idea but has arrayList of spots.   (see below line)
 
@@ -16,21 +14,11 @@ public class ParkingSpot //DOES NOT access the database - will just be given the
 {
 	private int spotId = -1;
 	private boolean occupied = false;
-	private Vehicle currentVehicle;
+	private String currentVehicle = "";
 	private Color colorClass = null;
-	private int lotId;
-
-	public ParkingSpot(){}
 	
-	public int getLotId() {
-		return lotId;
-	}
-
-
-	public void setLotId(int lotId) {
-		this.lotId = lotId;
-	}
-
+	
+	public ParkingSpot(){}
 	
 	
 	public void setSpotId(int sId)
@@ -38,7 +26,7 @@ public class ParkingSpot //DOES NOT access the database - will just be given the
 		this.spotId = sId;
 	}
 	
-	public void setCurrentVehicle(Vehicle cV)
+	public void setCurrentVehicle(String cV)
 	{
 		this.currentVehicle = cV;
 	}
@@ -52,7 +40,7 @@ public class ParkingSpot //DOES NOT access the database - will just be given the
 	{
 		try
 		{
-			this.colorClass = Color.getColor(c);
+			this.colorClass = Color.valueOf(c);
 		}
 		catch(Exception ex)
 		{
@@ -71,7 +59,7 @@ public class ParkingSpot //DOES NOT access the database - will just be given the
 		return this.occupied;
 	}
 	
-	public Vehicle getCurrentVehicle()
+	public String getCurVehicle()
 	{
 		return this.currentVehicle;
 	}

@@ -22,7 +22,7 @@ import java.util.List;
 		{
 			try{
 				conn = db.getConnection();
-				ps = conn.prepareStatement("insert into parkingSpot(parkingLotId,currentVehicle,occupied,colorClass) values(?,'',0,?)");
+				ps = conn.prepareStatement("insert into parkingSpot(parkingLotId,currentVehicle,occupied,colorClass) values(?,null,0,?)");
 				ps.setInt(1, p.getParkingLotId());
 				ps.setString(2, p.getColorPass());
 				status = ps.executeUpdate();
