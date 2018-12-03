@@ -98,10 +98,10 @@ table, th, td {
          	  </tr>	
 			  <c:forEach items="${vehicleList}" var="vehicle">
 			  		<tr>
-			  			<td> ${vehicle.make} </td> 
-			  			<td> ${vehicle.year} </td> 
-			  			<td> ${vehicle.model} </td>
-			  			<td> ${vehicle.color} </td>
+			  			<td id="vehicleMake"> ${vehicle.make} </td> 
+			  			<td id="vehicleYear"> ${vehicle.year} </td> 
+			  			<td id="vehicleModel"> ${vehicle.model} </td>
+			  			<td id="vehicleColor"> ${vehicle.color} </td>
 			  		</tr>
 			  	
 			  </c:forEach>

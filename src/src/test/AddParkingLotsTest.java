@@ -13,7 +13,7 @@ public class AddParkingLotsTest
 	System.setProperty("webdriver.chrome.driver","chromedriver.exe");
 	driver = new ChromeDriver();
 	 
-	driver.get("http://localhost:8080/ParkingManagementService/login.jsp");
+	driver.get("http://localhost:8080/OOAD_CourseProject/login.jsp");
 	Assert.assertEquals("Login Page", driver.getTitle());
 	}
 
