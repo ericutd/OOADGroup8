@@ -56,7 +56,6 @@ public class ParkingManager
 				{
 					ParkingLotService pl = new ParkingLotService();
 					pl.setParkingLotId(rs.getInt(1));
-					
 					this.lots.add(pl);
 				}
 			}
@@ -199,10 +198,7 @@ public class ParkingManager
 			throw new ParkingException("You are not parked in this spot!");
 		}
 		
-		
-		spot.setCurrentVehicle(null);
-		spot.setOccupied(false);
-		editSpot(spot, lotId);
+		unParkSpot(spot, lotId);
 	}
 	
 	
@@ -212,11 +208,14 @@ public class ParkingManager
 		String sqlStr = "UPDATE parkingSpot SET currentVehicle=" + lNum + ", occupied=true WHERE parkingLotId=" + lotId + " AND parkingSpotId=" + s.getSpotId();
 
 		db.executeUpdate(sqlStr);
+	}	
+	
+	private void unParkSpot(ParkingSpot s, int lotId) throws SQLException {
+		String lNum = s.getCurrentVehicle().getLicenseNum();
+		s.setCurrentVehicle(null);
+		s.setOccupied(false);
+		String sqlStr = "UPDATE parkingSpot SET currentVehicle=" + s.getCurrentVehicle() + ", occupied=false WHERE parkingLotId=" + lotId + " AND parkingSpotId=" + s.getSpotId();
+		db.executeUpdate(sqlStr);
 	}
-	
-	
-	
-	
-	
 	
 }

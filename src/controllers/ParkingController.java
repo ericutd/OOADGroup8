@@ -81,19 +81,19 @@ public class ParkingController extends HttpServlet
 				PM.unPark(userId, lotId, spotId);
 					
 				request.setAttribute("message", " Success! You have freed your spot!\n"); 
-				request.getRequestDispatcher("selection.jsp").forward(request, response);
+				request.getRequestDispatcher("welcome.jsp").forward(request, response);
 			}
 			else //error
 			{
 				request.setAttribute("message", "Error: Invalid Action");
-				request.getRequestDispatcher("select.jsp").forward(request, response);
+				request.getRequestDispatcher("error.jsp").forward(request, response);
 			}
 		}
 		catch(Exception ex)
 		{
 			ex.printStackTrace();
-			request.setAttribute("message", " " + ex);
-			request.getRequestDispatcher("select.jsp").forward(request, response);
+			request.setAttribute("message", " " + ex.getMessage());
+			request.getRequestDispatcher("error.jsp").forward(request, response);
 		}
 	}
 }
