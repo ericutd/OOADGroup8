@@ -17,10 +17,10 @@
 		<form id="selectReservation" action="permit" method="post" onsubmit="return validateReserve()">
 			Price <input type = "text" name = "price" /> <br> 
 			Permit Color <select name="color">
-				  <option value="Visitor">Visitor</option>
-				  <option value="Green">Green</option>
-				   <option value="Gold">Gold</option>
-				    <option value="Orange">Orange</option>
+				  <option value="VISITOR">Visitor</option>
+				  <option value="GREEN">Green</option>
+				   <option value="GOLD">Gold</option>
+				    <option value="ORANGE">Orange</option>
 				  <option value="PURPLE">Purple</option>
 				</select> <br>
 			Expiration Date <input type="date" id="start" name="exp_date"
