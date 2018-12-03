@@ -36,6 +36,7 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 			
 				while(rs.next()){
 					Vehicle v = new Vehicle();
+					v.setOwnerId(userid);
 					v.setMake(rs.getString(1));
 					v.setModel(rs.getString(2));
 					v.setLicenseNum(rs.getString(3));

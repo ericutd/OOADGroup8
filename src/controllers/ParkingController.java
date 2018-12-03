@@ -81,7 +81,7 @@ public class ParkingController extends HttpServlet
 				PM.unPark(userId, lotId, spotId);
 					
 				request.setAttribute("message", " Success! You have freed your spot!\n"); 
-				request.getRequestDispatcher("selection.jsp").forward(request, response);
+				request.getRequestDispatcher("welcome.jsp").forward(request, response);
 			}
 			else //error
 			{
