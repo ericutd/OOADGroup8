@@ -13,6 +13,4 @@ public interface MyDB {
 	String PASS="Test1234";
 	String CONN_URL="jdbc:mysql://127.0.0.1:3306/coursedatabase";
 
-	
-	
 }

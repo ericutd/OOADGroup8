@@ -135,11 +135,11 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
                 Vehicle vehicle = Builder.of(Vehicle::new)
                 		.with(Vehicle::setOwnerId, rs.getInt(1))
                 		//.with(Vehicle::setPermitId, rs.getInt(2))
-                		.with(Vehicle::setLicenseNum, rs.getString(3))
-                		.with(Vehicle::setMake, rs.getString(4))
-                		.with(Vehicle::setModel, rs.getString(5))
-                		.with(Vehicle::setYear, rs.getString(6))
-                		.with(Vehicle::setColor, rs.getString(7))
+                		.with(Vehicle::setLicenseNum, rs.getString(2))
+                		.with(Vehicle::setMake, rs.getString(3))
+                		.with(Vehicle::setModel, rs.getString(4))
+                		.with(Vehicle::setYear, rs.getString(5))
+                		.with(Vehicle::setColor, rs.getString(6))
                 		.build();
                 vehicles.add(vehicle);
 			}
