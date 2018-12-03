@@ -17,7 +17,7 @@ import java.sql.Connection;
 import dao.VehicleDao;
 
 
-public class ParkingLot 
+public class ParkingLotService 
 {
 	private int lotId;
 	private List<ParkingSpot> spots = new ArrayList<>();
@@ -27,7 +27,7 @@ public class ParkingLot
 	
 	
 	
-	public ParkingLot() throws SQLException, ParkingException
+	public ParkingLotService() throws SQLException, ParkingException
 	{	
 		loadSpots();
 	}

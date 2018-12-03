@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import application.reservation.ParkingLot;
+import application.reservation.ParkingLotService;
 import dao.ParkingManager;
 import dao.VehicleDao;
 import pojo.Vehicle;
@@ -45,7 +45,7 @@ public class ParkingController extends HttpServlet
 			{	
 				lotId = Integer.parseInt(request.getParameter("parkingLotId"));
 				
-				ParkingLot selectedLot = PM.getLot(lotId);
+				ParkingLotService selectedLot = PM.getLot(lotId);
 				
 				if(selectedLot == null)
 				{

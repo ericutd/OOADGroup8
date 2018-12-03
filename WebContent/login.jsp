@@ -30,8 +30,7 @@
 	
 	Email ID: <input type="text" name="email" id="email"><br>
 	Password: <input type="password" name="password" id="password"><br>
-	<input type="submit" name="submit" value="login"><br>
-	<a href="register.jsp">registration</a>
+	<input type="submit" name="submit" value="login"><br><a href="register.jsp">Sign Up</a>
 	
 	</form>
 </body>

@@ -4,7 +4,7 @@
 <%@ page import="pojo.Vehicle" %>
 <%@ page import="pojo.ParkingSpot" %>
 <%@page import="application.user.UserService"%>
-<%@page import="application.reservation.ParkingLot"%>
+<%@page import="application.reservation.ParkingLotService"%>
 <%@ page import="others.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>   
@@ -27,25 +27,24 @@ table, th, td {
 <body>
 	
    <jsp:include page="header.jsp"/>
-   <%   
-		UserService service1 = new UserService();
-   		VehicleService service = new VehicleService();
-   		ParkingLot parkingLotService = new ParkingLot();
-		HttpSession session_user1 = request.getSession();
-		String user = String.valueOf(session_user1.getAttribute("userId"));
-		 
-		
-		List<Vehicle> vehicleList = new ArrayList<>();
-		if(user != null) {
-			int userId = Integer.parseInt(user);
-			request.setAttribute("userdata", service1.getUser(userId));		 
-			vehicleList = service.getVehicles(userId);
-			request.setAttribute("vehicleList", vehicleList);
-			List<ParkingSpot> spots = parkingLotService.getSpots();
-			request.setAttribute("spots", spots);
-		}
-		
-	%>
+   <%
+   	UserService service1 = new UserService();
+      		VehicleService service = new VehicleService();
+      		ParkingLotService parkingLotService = new ParkingLotService();
+   		HttpSession session_user1 = request.getSession();
+   		String user = String.valueOf(session_user1.getAttribute("userId"));
+   		 
+   		
+   		List<Vehicle> vehicleList = new ArrayList<>();
+   		if(user != null) {
+   	int userId = Integer.parseInt(user);
+   	request.setAttribute("userdata", service1.getUser(userId));		 
+   	vehicleList = service.getVehicles(userId);
+   	request.setAttribute("vehicleList", vehicleList);
+   	List<ParkingSpot> spots = parkingLotService.getSpots();
+   	request.setAttribute("spots", spots);
+   		}
+   %>
 	
 	<div class="container">
       <div class="row">
