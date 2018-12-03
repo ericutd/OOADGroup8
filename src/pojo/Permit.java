@@ -3,9 +3,11 @@ package pojo;
 public class Permit {
 
 	public static enum PermitColor {
-		BLUE("blue"),
-		YELLOW("yellow"),
-		PURPLE("purple");
+		VISITOR("Visitor"),
+		GREEN("Green"),
+		GOLD("Gold"),
+		ORANGE("Orange"),
+		PURPLE("Purple");
 		
 		String color;
 		PermitColor(String color) {

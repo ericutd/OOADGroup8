@@ -1,4 +1,4 @@
-<%@page import="controllers.SelectionController"%>
+<%@page import="controllers.ParkingController"%>
 <%@page import="db.DbManager"%>
 <%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -19,7 +19,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="">Home
+              <a class="nav-link" href="welcome.jsp">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>

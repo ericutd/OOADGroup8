@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ public interface ICRUDOperations<T> {
 	
 	T deleteById(long id);
 	
-	T delete(T obj);
+	T delete(T obj) throws SQLException;
 	
 	List<T> findById(long id);
 	
