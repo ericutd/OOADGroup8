@@ -1,15 +1,18 @@
 package application.permit;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.PermitDAO;
+import dao.VehicleDao;
 import helpers.Builder;
 import pojo.Permit;
 import pojo.Permit.PermitColor;
+import pojo.Vehicle;
 
 public class PermitService {
 	
@@ -32,7 +35,14 @@ public class PermitService {
 				.build();
 		
 		PermitDAO permitDAO = new PermitDAO();
-		permitDAO.insert(permit);
+		permit = permitDAO.insert(permit);
+		
+		VehicleDao vehicleDAO = new VehicleDao();
+		List<Vehicle> vehicle = vehicleDAO.findById(userId);
+		for(Vehicle v : vehicle) {
+			v.setPermitId(permit.getPermitId());
+			vehicleDAO.updatePermit(v);
+		}
 		
 		System.out.println("Added new Permit");
 		response.sendRedirect("welcome.jsp");

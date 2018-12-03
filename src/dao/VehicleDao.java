@@ -70,6 +70,20 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 		return status;
 	}
 	
+	
+	public void updatePermit(Vehicle v) {
+		try{
+			conn = DbManager.getInstance().getConnection();
+			ps =conn.prepareStatement("update vehicle set permitId = ? where ownerId=?");
+			ps.setInt(1, v.getPermitId());
+			ps.setInt(2, v.getOwnerId());
+			ps.executeUpdate();
+			conn.close();
+		}catch(Exception e){
+			System.out.println(e);
+		}
+	}
+	
 	public void updateVehicleDetails(Vehicle v) {
 		try{
 			conn = DbManager.getInstance().getConnection();

@@ -28,14 +28,17 @@ public class PermitDAO implements ICRUDOperations<Permit> {
 		insertSql.append(permit.getPrice() + ",");
 		insertSql.append("\"" + permit.getPermitColor().name() + "\""+ ",");
 		insertSql.append("\"" + permit.getExpDate() + "\"");
-		
-//		insertSql.setLength(insertSql.length()-1);
 		insertSql.append(")");
 		
 		// executing phase
 		try {
 			System.out.println(insertSql.toString());
 			dbManager.executeUpdate(insertSql.toString());
+			
+			ResultSet rs = dbManager.execute("select permitId from permit where ownerId= " + permit.getOwnerId());
+			while(rs.next()) {
+				permit.setPermitId(rs.getInt("permitId"));
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Error in inserting" +  permit);
