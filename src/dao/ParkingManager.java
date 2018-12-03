@@ -192,8 +192,7 @@ public class ParkingManager
 	{	
 		ParkingLotService lot = this.findLotById(lotId);
 		ParkingSpot spot = lot.getSpotById(spotId);
-		Vehicle currentVehicle = spot.getCurVehicle();
-		
+		Vehicle currentVehicle = spot.getCurrentVehicle();		
 		if(currentVehicle.getOwnerId() != userId)
 		{
 			throw new ParkingException("You are not parked in this spot!");
@@ -208,8 +207,8 @@ public class ParkingManager
 	
 	private void editSpot(ParkingSpot s, int lotId) throws SQLException
 	{
-		String lNum = s.getCurVehicle().getLicenseNum();
-		String sqlStr = "UPDATE parkingSpot SET currentVehicle=" + lNum + ", occupied=true WHERE parkingLotId=" + String.valueOf(lotId) + ", AND parkingSpotId=" + s.getSpotId();
+		String lNum = s.getCurrentVehicle().getLicenseNum();
+		String sqlStr = "UPDATE parkingSpot SET currentVehicle=" + lNum + ", occupied=true WHERE parkingLotId=" + lotId + " AND parkingSpotId=" + s.getSpotId();
 		db.executeUpdate(sqlStr);
 	}
 	

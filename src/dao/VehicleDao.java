@@ -29,7 +29,7 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 		ArrayList<Vehicle> vi= new ArrayList<>();
 		try{
 			conn = DbManager.getInstance().getConnection();
-			ps =conn.prepareStatement("select make,model,licenseNum from vehicle where ownerId=?");
+			ps =conn.prepareStatement("select make,model,licenseNum, permitId from vehicle where ownerId=?");
 			ps.setInt(1, userid);
 
 			ResultSet rs = ps.executeQuery();
@@ -39,6 +39,7 @@ public class VehicleDao implements ICRUDOperations<Vehicle> {
 					v.setMake(rs.getString(1));
 					v.setModel(rs.getString(2));
 					v.setLicenseNum(rs.getString(3));
+					v.setPermitId(rs.getInt(4));
 					vi.add(v);
 				}
 				

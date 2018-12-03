@@ -17,7 +17,7 @@
 		<form id="selectReservation" action="SelectionController" method="post" onsubmit="return validateReserve()">
 			Lot ID<input type="text" name="parkingLotId"><br>
 			SPOT ID<input type="text" name="parkingSpotId"><br>
-			<input type="submit" name="reserveSubmit" value="reserve">
+			<input type="submit" name="reserveSubmit" value="park">
 		</form>
 	</div>
 </body>
