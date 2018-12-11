@@ -1,3 +1,6 @@
+/*
+Author: Zack Oldham
+*/
 package others;
 
 import java.util.ArrayList;
